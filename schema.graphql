@@ -1,0 +1,148 @@
+type Character {
+    comics: [Comic!]
+    description: String
+    events: [Event!]
+    id: ID!
+    modified: String
+    name: String
+    series: [Series!]
+    stories:[Story!]
+    thumbnail: String
+    urls: [URL!]
+}
+
+type Comic {
+    characters: [Character!]
+    collectedIssues: [Comic!]
+    collections: [Comic!]
+    creators: [Creator!]
+    dates: [ComicDate!]
+    description: String
+    diamondCode: String
+    digitalID: Int
+    ean: String
+    events: [Event!]
+    format: String
+    id: ID!
+    images: [String!]
+    isbn: String
+    issn: String
+    issueNumber: Float
+    modified: String
+    pageCount: Int
+    prices:[ComicPrice!]
+    seriesID: Int
+    stories:[Story!]
+    textObjects:[TextObject!]
+    thumbnail: String
+    title: String
+    upc: String
+    urls: [URL!]
+    variantDescription: String
+    variants:  [Comic!]
+}
+
+type Creator {
+    comics: [Comic!]
+    events: [Event!]
+    firstName: String
+    fullName: String!
+    id: ID!
+    lastName: String
+    middleName: String
+    modified: String
+    series: [Series!]
+    stories:[Story!]
+    suffix: String
+    thumbnail: String
+    urls: [URL!]
+}
+
+type Event {
+    characters: [Character!]
+    comics: [Comic!]
+    creators: [Creator!]
+    description: String
+    end: String
+    id: ID!
+    modified: String
+    next: Int
+    previous: Int
+    series: [Series!]
+    start: String
+    stories:[Story!]
+    thumbnail: String!
+    title: String!
+    urls: [URL!]
+}
+
+type Series {
+    characters: [Character!]
+    comics: [Comic!]
+    creators: [Creator!]
+    description: String
+    endYear: Int
+    events: [Event!]
+    id: ID!
+    modified: String
+    next: Int
+    previous: Int
+    rating: String
+    startYear: Int
+    stories:[Story!]
+    thumbnail: String!
+    title: String!
+    urls: [URL!]
+}
+
+type Story {
+    characters: [Character!]
+    comics: [Comic!]
+    creators: [Creator!]
+    description: String
+    events: [Event!]
+    id: ID!
+    modified: String
+    originalIssue: Comic
+    series: [Series!]
+    thumbnail: String!
+    title: String!
+    type: String!
+}
+
+
+type ComicDate {
+	date: String!
+	type: String!
+}
+
+type ComicPrice {
+	price: Float!
+	type: String!
+}
+
+type TextObject  {
+	language: String!
+	text:     String!
+	type:     String!
+}
+
+type URL {
+    type: String!
+    url: String!
+}
+
+type Query {
+  character(input: Int): Character
+  characters: [Character!]
+  comic(input: Int): Comic
+  comics: [Comic!]
+  creator(input: Int): Creator
+  creators: [Creator!]
+  event(input: Int): Event
+  events: [Event!]
+  serie(input: Int): Series
+  series: [Series!]
+  story(input: Int): Story
+  stories: [Story!]
+}

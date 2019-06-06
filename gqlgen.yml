@@ -1,0 +1,48 @@
+# .gqlgen.yml example
+#
+# Refer to https://gqlgen.com/config/
+# for detailed .gqlgen.yml documentation.
+
+schema:
+  - schema.graphql
+
+exec:
+  filename: macogql/graphql.go
+  package: macogql
+
+model:
+  filename: macogql/struct.go
+  package: macogql
+
+resolver:
+  filename: server/resolver.go
+  package: server
+  type: Resolver
+
+struct_tag: json
+
+models:
+  Character:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.Character
+  Comic:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.Comic
+  Creator:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.Creator
+  Event:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.Event
+  Series:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.Series
+  Story:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.Story
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.IntID
+      - github.com/99designs/gqlgen/graphql.ID
+  ComicDate:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.ComicDate
+  ComicPrice:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.ComicPrice
+  TextObject:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.TextObject
+  URL:
+    model: github.com/loivis/marvel-comics-api-data-loader/maco.URL
