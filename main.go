@@ -21,7 +21,10 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	store := mongodb.New()
+	store, err := mongodb.New(conf.mongodbURI, conf.mongodbDatabase)
+	if err != nil {
+		log.Fatalf("failed to setup mongodb: %v", err)
+	}
 
 	server.New(store).Register(mux)
 

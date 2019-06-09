@@ -9,17 +9,17 @@ import (
 type creatorResolver struct{ *Server }
 
 func (r *creatorResolver) Comics(ctx context.Context, obj *maco.Creator) ([]*maco.Comic, error) {
-	panic("not implemented")
+	return r.store.ComicsByIDs(ctx, obj.Comics)
 }
 
 func (r *creatorResolver) Events(ctx context.Context, obj *maco.Creator) ([]*maco.Event, error) {
-	panic("not implemented")
+	return r.store.EventsByIDs(ctx, obj.Events)
 }
 
 func (r *creatorResolver) Series(ctx context.Context, obj *maco.Creator) ([]*maco.Series, error) {
-	panic("not implemented")
+	return r.store.SeriesByIDs(ctx, obj.Series)
 }
 
 func (r *creatorResolver) Stories(ctx context.Context, obj *maco.Creator) ([]*maco.Story, error) {
-	panic("not implemented")
+	return r.store.StoriesByIDs(ctx, obj.Stories)
 }
