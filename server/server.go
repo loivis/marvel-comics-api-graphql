@@ -18,11 +18,6 @@ func New(store macogql.Store) *Server {
 	}
 }
 
-func (s *Server) Register(mux *http.ServeMux) {
-	mux.Handle("/", handler.Playground("GraphQL playground", "/query"))
-	mux.Handle("/query", handler.GraphQL(macogql.NewExecutableSchema(macogql.Config{Resolvers: s})))
-}
-
 func (s *Server) Character() macogql.CharacterResolver {
 	return &characterResolver{s}
 }
@@ -53,4 +48,23 @@ func (s *Server) Series() macogql.SeriesResolver {
 
 func (s *Server) Story() macogql.StoryResolver {
 	return &storyResolver{s}
+}
+
+func (s *Server) Register(mux *http.ServeMux) {
+	mux.Handle("/", handler.Playground("GraphQL playground", "/query"))
+	mux.Handle("/query", handler.GraphQL(macogql.NewExecutableSchema(macogql.Config{Resolvers: s})))
+}
+
+func fromTo(offset, length, max int) (int, int) {
+	from, to := offset, offset+length
+
+	if from > max {
+		from = max
+	}
+
+	if to > max {
+		to = max
+	}
+
+	return from, to
 }

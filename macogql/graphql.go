@@ -62,6 +62,12 @@ type ComplexityRoot struct {
 		URLs        func(childComplexity int) int
 	}
 
+	CharactersResult struct {
+		Characters func(childComplexity int) int
+		PageInfo   func(childComplexity int) int
+		TotalCount func(childComplexity int) int
+	}
+
 	Comic struct {
 		Characters         func(childComplexity int) int
 		CollectedIssues    func(childComplexity int) int
@@ -103,6 +109,12 @@ type ComplexityRoot struct {
 		Type  func(childComplexity int) int
 	}
 
+	ComicsResult struct {
+		Comics     func(childComplexity int) int
+		PageInfo   func(childComplexity int) int
+		TotalCount func(childComplexity int) int
+	}
+
 	Creator struct {
 		Comics     func(childComplexity int) int
 		Events     func(childComplexity int) int
@@ -117,6 +129,12 @@ type ComplexityRoot struct {
 		Suffix     func(childComplexity int) int
 		Thumbnail  func(childComplexity int) int
 		URLs       func(childComplexity int) int
+	}
+
+	CreatorsResult struct {
+		Creators   func(childComplexity int) int
+		PageInfo   func(childComplexity int) int
+		TotalCount func(childComplexity int) int
 	}
 
 	Event struct {
@@ -137,19 +155,30 @@ type ComplexityRoot struct {
 		URLs        func(childComplexity int) int
 	}
 
-	Query struct {
-		Character  func(childComplexity int, input *int) int
-		Characters func(childComplexity int) int
-		Comic      func(childComplexity int, input *int) int
-		Comics     func(childComplexity int) int
-		Creator    func(childComplexity int, input *int) int
-		Creators   func(childComplexity int) int
-		Event      func(childComplexity int, input *int) int
+	EventsResult struct {
 		Events     func(childComplexity int) int
-		Serie      func(childComplexity int, input *int) int
-		Series     func(childComplexity int) int
-		Stories    func(childComplexity int) int
-		Story      func(childComplexity int, input *int) int
+		PageInfo   func(childComplexity int) int
+		TotalCount func(childComplexity int) int
+	}
+
+	PageInfo struct {
+		End     func(childComplexity int) int
+		HasNext func(childComplexity int) int
+	}
+
+	Query struct {
+		Character  func(childComplexity int, id *int) int
+		Characters func(childComplexity int, first *int, after *int) int
+		Comic      func(childComplexity int, id *int) int
+		Comics     func(childComplexity int, first *int, after *int) int
+		Creator    func(childComplexity int, id *int) int
+		Creators   func(childComplexity int, first *int, after *int) int
+		Event      func(childComplexity int, id *int) int
+		Events     func(childComplexity int, first *int, after *int) int
+		Serie      func(childComplexity int, id *int) int
+		Series     func(childComplexity int, first *int, after *int) int
+		Stories    func(childComplexity int, first *int, after *int) int
+		Story      func(childComplexity int, id *int) int
 	}
 
 	Series struct {
@@ -169,6 +198,18 @@ type ComplexityRoot struct {
 		Thumbnail   func(childComplexity int) int
 		Title       func(childComplexity int) int
 		URLs        func(childComplexity int) int
+	}
+
+	SeriesResult struct {
+		PageInfo   func(childComplexity int) int
+		Series     func(childComplexity int) int
+		TotalCount func(childComplexity int) int
+	}
+
+	StoriesResult struct {
+		PageInfo   func(childComplexity int) int
+		Stories    func(childComplexity int) int
+		TotalCount func(childComplexity int) int
 	}
 
 	Story struct {
@@ -238,18 +279,18 @@ type EventResolver interface {
 	Stories(ctx context.Context, obj *maco.Event) ([]*maco.Story, error)
 }
 type QueryResolver interface {
-	Character(ctx context.Context, input *int) (*maco.Character, error)
-	Characters(ctx context.Context) ([]*maco.Character, error)
-	Comic(ctx context.Context, input *int) (*maco.Comic, error)
-	Comics(ctx context.Context) ([]*maco.Comic, error)
-	Creator(ctx context.Context, input *int) (*maco.Creator, error)
-	Creators(ctx context.Context) ([]*maco.Creator, error)
-	Event(ctx context.Context, input *int) (*maco.Event, error)
-	Events(ctx context.Context) ([]*maco.Event, error)
-	Serie(ctx context.Context, input *int) (*maco.Series, error)
-	Series(ctx context.Context) ([]*maco.Series, error)
-	Story(ctx context.Context, input *int) (*maco.Story, error)
-	Stories(ctx context.Context) ([]*maco.Story, error)
+	Character(ctx context.Context, id *int) (*maco.Character, error)
+	Characters(ctx context.Context, first *int, after *int) (*CharactersResult, error)
+	Comic(ctx context.Context, id *int) (*maco.Comic, error)
+	Comics(ctx context.Context, first *int, after *int) (*ComicsResult, error)
+	Creator(ctx context.Context, id *int) (*maco.Creator, error)
+	Creators(ctx context.Context, first *int, after *int) (*CreatorsResult, error)
+	Event(ctx context.Context, id *int) (*maco.Event, error)
+	Events(ctx context.Context, first *int, after *int) (*EventsResult, error)
+	Serie(ctx context.Context, id *int) (*maco.Series, error)
+	Series(ctx context.Context, first *int, after *int) (*SeriesResult, error)
+	Story(ctx context.Context, id *int) (*maco.Story, error)
+	Stories(ctx context.Context, first *int, after *int) (*StoriesResult, error)
 }
 type SeriesResolver interface {
 	Characters(ctx context.Context, obj *maco.Series) ([]*maco.Character, error)
@@ -355,6 +396,27 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Character.URLs(childComplexity), true
+
+	case "CharactersResult.characters":
+		if e.complexity.CharactersResult.Characters == nil {
+			break
+		}
+
+		return e.complexity.CharactersResult.Characters(childComplexity), true
+
+	case "CharactersResult.pageInfo":
+		if e.complexity.CharactersResult.PageInfo == nil {
+			break
+		}
+
+		return e.complexity.CharactersResult.PageInfo(childComplexity), true
+
+	case "CharactersResult.totalCount":
+		if e.complexity.CharactersResult.TotalCount == nil {
+			break
+		}
+
+		return e.complexity.CharactersResult.TotalCount(childComplexity), true
 
 	case "Comic.characters":
 		if e.complexity.Comic.Characters == nil {
@@ -580,6 +642,27 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.ComicPrice.Type(childComplexity), true
 
+	case "ComicsResult.comics":
+		if e.complexity.ComicsResult.Comics == nil {
+			break
+		}
+
+		return e.complexity.ComicsResult.Comics(childComplexity), true
+
+	case "ComicsResult.pageInfo":
+		if e.complexity.ComicsResult.PageInfo == nil {
+			break
+		}
+
+		return e.complexity.ComicsResult.PageInfo(childComplexity), true
+
+	case "ComicsResult.totalCount":
+		if e.complexity.ComicsResult.TotalCount == nil {
+			break
+		}
+
+		return e.complexity.ComicsResult.TotalCount(childComplexity), true
+
 	case "Creator.comics":
 		if e.complexity.Creator.Comics == nil {
 			break
@@ -670,6 +753,27 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Creator.URLs(childComplexity), true
+
+	case "CreatorsResult.creators":
+		if e.complexity.CreatorsResult.Creators == nil {
+			break
+		}
+
+		return e.complexity.CreatorsResult.Creators(childComplexity), true
+
+	case "CreatorsResult.pageInfo":
+		if e.complexity.CreatorsResult.PageInfo == nil {
+			break
+		}
+
+		return e.complexity.CreatorsResult.PageInfo(childComplexity), true
+
+	case "CreatorsResult.totalCount":
+		if e.complexity.CreatorsResult.TotalCount == nil {
+			break
+		}
+
+		return e.complexity.CreatorsResult.TotalCount(childComplexity), true
 
 	case "Event.characters":
 		if e.complexity.Event.Characters == nil {
@@ -776,6 +880,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Event.URLs(childComplexity), true
 
+	case "EventsResult.events":
+		if e.complexity.EventsResult.Events == nil {
+			break
+		}
+
+		return e.complexity.EventsResult.Events(childComplexity), true
+
+	case "EventsResult.pageInfo":
+		if e.complexity.EventsResult.PageInfo == nil {
+			break
+		}
+
+		return e.complexity.EventsResult.PageInfo(childComplexity), true
+
+	case "EventsResult.totalCount":
+		if e.complexity.EventsResult.TotalCount == nil {
+			break
+		}
+
+		return e.complexity.EventsResult.TotalCount(childComplexity), true
+
+	case "PageInfo.end":
+		if e.complexity.PageInfo.End == nil {
+			break
+		}
+
+		return e.complexity.PageInfo.End(childComplexity), true
+
+	case "PageInfo.hasNext":
+		if e.complexity.PageInfo.HasNext == nil {
+			break
+		}
+
+		return e.complexity.PageInfo.HasNext(childComplexity), true
+
 	case "Query.character":
 		if e.complexity.Query.Character == nil {
 			break
@@ -786,14 +925,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Character(childComplexity, args["input"].(*int)), true
+		return e.complexity.Query.Character(childComplexity, args["id"].(*int)), true
 
 	case "Query.characters":
 		if e.complexity.Query.Characters == nil {
 			break
 		}
 
-		return e.complexity.Query.Characters(childComplexity), true
+		args, err := ec.field_Query_characters_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Characters(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Query.comic":
 		if e.complexity.Query.Comic == nil {
@@ -805,14 +949,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Comic(childComplexity, args["input"].(*int)), true
+		return e.complexity.Query.Comic(childComplexity, args["id"].(*int)), true
 
 	case "Query.comics":
 		if e.complexity.Query.Comics == nil {
 			break
 		}
 
-		return e.complexity.Query.Comics(childComplexity), true
+		args, err := ec.field_Query_comics_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Comics(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Query.creator":
 		if e.complexity.Query.Creator == nil {
@@ -824,14 +973,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Creator(childComplexity, args["input"].(*int)), true
+		return e.complexity.Query.Creator(childComplexity, args["id"].(*int)), true
 
 	case "Query.creators":
 		if e.complexity.Query.Creators == nil {
 			break
 		}
 
-		return e.complexity.Query.Creators(childComplexity), true
+		args, err := ec.field_Query_creators_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Creators(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Query.event":
 		if e.complexity.Query.Event == nil {
@@ -843,14 +997,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Event(childComplexity, args["input"].(*int)), true
+		return e.complexity.Query.Event(childComplexity, args["id"].(*int)), true
 
 	case "Query.events":
 		if e.complexity.Query.Events == nil {
 			break
 		}
 
-		return e.complexity.Query.Events(childComplexity), true
+		args, err := ec.field_Query_events_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Events(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Query.serie":
 		if e.complexity.Query.Serie == nil {
@@ -862,21 +1021,31 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Serie(childComplexity, args["input"].(*int)), true
+		return e.complexity.Query.Serie(childComplexity, args["id"].(*int)), true
 
 	case "Query.series":
 		if e.complexity.Query.Series == nil {
 			break
 		}
 
-		return e.complexity.Query.Series(childComplexity), true
+		args, err := ec.field_Query_series_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Series(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Query.stories":
 		if e.complexity.Query.Stories == nil {
 			break
 		}
 
-		return e.complexity.Query.Stories(childComplexity), true
+		args, err := ec.field_Query_stories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.Stories(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Query.story":
 		if e.complexity.Query.Story == nil {
@@ -888,7 +1057,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Story(childComplexity, args["input"].(*int)), true
+		return e.complexity.Query.Story(childComplexity, args["id"].(*int)), true
 
 	case "Series.characters":
 		if e.complexity.Series.Characters == nil {
@@ -1001,6 +1170,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Series.URLs(childComplexity), true
+
+	case "SeriesResult.pageInfo":
+		if e.complexity.SeriesResult.PageInfo == nil {
+			break
+		}
+
+		return e.complexity.SeriesResult.PageInfo(childComplexity), true
+
+	case "SeriesResult.series":
+		if e.complexity.SeriesResult.Series == nil {
+			break
+		}
+
+		return e.complexity.SeriesResult.Series(childComplexity), true
+
+	case "SeriesResult.totalCount":
+		if e.complexity.SeriesResult.TotalCount == nil {
+			break
+		}
+
+		return e.complexity.SeriesResult.TotalCount(childComplexity), true
+
+	case "StoriesResult.pageInfo":
+		if e.complexity.StoriesResult.PageInfo == nil {
+			break
+		}
+
+		return e.complexity.StoriesResult.PageInfo(childComplexity), true
+
+	case "StoriesResult.stories":
+		if e.complexity.StoriesResult.Stories == nil {
+			break
+		}
+
+		return e.complexity.StoriesResult.Stories(childComplexity), true
+
+	case "StoriesResult.totalCount":
+		if e.complexity.StoriesResult.TotalCount == nil {
+			break
+		}
+
+		return e.complexity.StoriesResult.TotalCount(childComplexity), true
 
 	case "Story.characters":
 		if e.complexity.Story.Characters == nil {
@@ -1297,7 +1508,6 @@ type Story {
     type: String!
 }
 
-
 type ComicDate {
 	date: String!
 	type: String!
@@ -1319,19 +1529,60 @@ type URL {
     url: String!
 }
 
+type CharactersResult {
+    characters: [Character!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type ComicsResult {
+    comics: [Comic!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type CreatorsResult {
+    creators: [Creator!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type EventsResult {
+    events: [Event!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type SeriesResult {
+    series: [Series!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type StoriesResult {
+    stories: [Story!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type PageInfo {
+    end: Int!
+    hasNext: Boolean!
+}
+
 type Query {
-  character(input: Int): Character
-  characters: [Character!]
-  comic(input: Int): Comic
-  comics: [Comic!]
-  creator(input: Int): Creator
-  creators: [Creator!]
-  event(input: Int): Event
-  events: [Event!]
-  serie(input: Int): Series
-  series: [Series!]
-  story(input: Int): Story
-  stories: [Story!]
+    character(id: Int): Character
+    characters(first: Int = 100, after: Int = 0): CharactersResult!
+    comic(id: Int): Comic
+    comics(first: Int = 100, after: Int = 0): ComicsResult!
+    creator(id: Int): Creator
+    creators(first: Int = 100, after: Int = 0): CreatorsResult!
+    event(id: Int): Event
+    events(first: Int = 100, after: Int = 0): EventsResult!
+    serie(id: Int): Series
+    series(first: Int = 100, after: Int = 0): SeriesResult!
+    story(id: Int): Story
+    stories(first: Int = 100, after: Int = 0): StoriesResult!
 }
 `},
 )
@@ -1358,13 +1609,35 @@ func (ec *executionContext) field_Query_character_args(ctx context.Context, rawA
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
-	if tmp, ok := rawArgs["input"]; ok {
+	if tmp, ok := rawArgs["id"]; ok {
 		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["input"] = arg0
+	args["id"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_characters_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
 	return args, nil
 }
 
@@ -1372,13 +1645,35 @@ func (ec *executionContext) field_Query_comic_args(ctx context.Context, rawArgs 
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
-	if tmp, ok := rawArgs["input"]; ok {
+	if tmp, ok := rawArgs["id"]; ok {
 		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["input"] = arg0
+	args["id"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_comics_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
 	return args, nil
 }
 
@@ -1386,13 +1681,35 @@ func (ec *executionContext) field_Query_creator_args(ctx context.Context, rawArg
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
-	if tmp, ok := rawArgs["input"]; ok {
+	if tmp, ok := rawArgs["id"]; ok {
 		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["input"] = arg0
+	args["id"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_creators_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
 	return args, nil
 }
 
@@ -1400,13 +1717,35 @@ func (ec *executionContext) field_Query_event_args(ctx context.Context, rawArgs 
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
-	if tmp, ok := rawArgs["input"]; ok {
+	if tmp, ok := rawArgs["id"]; ok {
 		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["input"] = arg0
+	args["id"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_events_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
 	return args, nil
 }
 
@@ -1414,13 +1753,57 @@ func (ec *executionContext) field_Query_serie_args(ctx context.Context, rawArgs 
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
-	if tmp, ok := rawArgs["input"]; ok {
+	if tmp, ok := rawArgs["id"]; ok {
 		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["input"] = arg0
+	args["id"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_series_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_stories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
 	return args, nil
 }
 
@@ -1428,13 +1811,13 @@ func (ec *executionContext) field_Query_story_args(ctx context.Context, rawArgs 
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
-	if tmp, ok := rawArgs["input"]; ok {
+	if tmp, ok := rawArgs["id"]; ok {
 		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["input"] = arg0
+	args["id"] = arg0
 	return args, nil
 }
 
@@ -1711,6 +2094,84 @@ func (ec *executionContext) _Character_urls(ctx context.Context, field graphql.C
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _CharactersResult_characters(ctx context.Context, field graphql.CollectedField, obj *CharactersResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "CharactersResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Characters, nil
+	})
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*maco.Character)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOCharacter2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCharacter(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _CharactersResult_pageInfo(ctx context.Context, field graphql.CollectedField, obj *CharactersResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "CharactersResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PageInfo, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*PageInfo)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _CharactersResult_totalCount(ctx context.Context, field graphql.CollectedField, obj *CharactersResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "CharactersResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TotalCount, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_characters(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2496,6 +2957,84 @@ func (ec *executionContext) _ComicPrice_type(ctx context.Context, field graphql.
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
+func (ec *executionContext) _ComicsResult_comics(ctx context.Context, field graphql.CollectedField, obj *ComicsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "ComicsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Comics, nil
+	})
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*maco.Comic)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _ComicsResult_pageInfo(ctx context.Context, field graphql.CollectedField, obj *ComicsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "ComicsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PageInfo, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*PageInfo)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _ComicsResult_totalCount(ctx context.Context, field graphql.CollectedField, obj *ComicsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "ComicsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TotalCount, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
 func (ec *executionContext) _Creator_comics(ctx context.Context, field graphql.CollectedField, obj *maco.Creator) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
@@ -2812,6 +3351,84 @@ func (ec *executionContext) _Creator_urls(ctx context.Context, field graphql.Col
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _CreatorsResult_creators(ctx context.Context, field graphql.CollectedField, obj *CreatorsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "CreatorsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Creators, nil
+	})
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*maco.Creator)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOCreator2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _CreatorsResult_pageInfo(ctx context.Context, field graphql.CollectedField, obj *CreatorsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "CreatorsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PageInfo, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*PageInfo)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _CreatorsResult_totalCount(ctx context.Context, field graphql.CollectedField, obj *CreatorsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "CreatorsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TotalCount, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Event_characters(ctx context.Context, field graphql.CollectedField, obj *maco.Event) graphql.Marshaler {
@@ -3183,6 +3800,138 @@ func (ec *executionContext) _Event_urls(ctx context.Context, field graphql.Colle
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
 }
 
+func (ec *executionContext) _EventsResult_events(ctx context.Context, field graphql.CollectedField, obj *EventsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "EventsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Events, nil
+	})
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*maco.Event)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _EventsResult_pageInfo(ctx context.Context, field graphql.CollectedField, obj *EventsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "EventsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PageInfo, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*PageInfo)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _EventsResult_totalCount(ctx context.Context, field graphql.CollectedField, obj *EventsResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "EventsResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TotalCount, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _PageInfo_end(ctx context.Context, field graphql.CollectedField, obj *PageInfo) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "PageInfo",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.End, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _PageInfo_hasNext(ctx context.Context, field graphql.CollectedField, obj *PageInfo) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "PageInfo",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.HasNext, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
 func (ec *executionContext) _Query_character(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
@@ -3203,7 +3952,7 @@ func (ec *executionContext) _Query_character(ctx context.Context, field graphql.
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Character(rctx, args["input"].(*int))
+		return ec.resolvers.Query().Character(rctx, args["id"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3224,18 +3973,28 @@ func (ec *executionContext) _Query_characters(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_characters_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Characters(rctx)
+		return ec.resolvers.Query().Characters(rctx, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Character)
+	res := resTmp.(*CharactersResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCharacter2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCharacter(ctx, field.Selections, res)
+	return ec.marshalNCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_comic(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -3258,7 +4017,7 @@ func (ec *executionContext) _Query_comic(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Comic(rctx, args["input"].(*int))
+		return ec.resolvers.Query().Comic(rctx, args["id"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3279,18 +4038,28 @@ func (ec *executionContext) _Query_comics(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_comics_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Comics(rctx)
+		return ec.resolvers.Query().Comics(rctx, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalNComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_creator(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -3313,7 +4082,7 @@ func (ec *executionContext) _Query_creator(ctx context.Context, field graphql.Co
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Creator(rctx, args["input"].(*int))
+		return ec.resolvers.Query().Creator(rctx, args["id"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3334,18 +4103,28 @@ func (ec *executionContext) _Query_creators(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_creators_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Creators(rctx)
+		return ec.resolvers.Query().Creators(rctx, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Creator)
+	res := resTmp.(*CreatorsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCreator2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx, field.Selections, res)
+	return ec.marshalNCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_event(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -3368,7 +4147,7 @@ func (ec *executionContext) _Query_event(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Event(rctx, args["input"].(*int))
+		return ec.resolvers.Query().Event(rctx, args["id"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3389,18 +4168,28 @@ func (ec *executionContext) _Query_events(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_events_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Events(rctx)
+		return ec.resolvers.Query().Events(rctx, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Event)
+	res := resTmp.(*EventsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+	return ec.marshalNEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_serie(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -3423,7 +4212,7 @@ func (ec *executionContext) _Query_serie(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Serie(rctx, args["input"].(*int))
+		return ec.resolvers.Query().Serie(rctx, args["id"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3444,18 +4233,28 @@ func (ec *executionContext) _Query_series(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_series_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Series(rctx)
+		return ec.resolvers.Query().Series(rctx, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Series)
+	res := resTmp.(*SeriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOSeries2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx, field.Selections, res)
+	return ec.marshalNSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_story(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -3478,7 +4277,7 @@ func (ec *executionContext) _Query_story(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Story(rctx, args["input"].(*int))
+		return ec.resolvers.Query().Story(rctx, args["id"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3499,18 +4298,28 @@ func (ec *executionContext) _Query_stories(ctx context.Context, field graphql.Co
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Query_stories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Stories(rctx)
+		return ec.resolvers.Query().Stories(rctx, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Story)
+	res := resTmp.(*StoriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+	return ec.marshalNStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) graphql.Marshaler {
@@ -3959,6 +4768,162 @@ func (ec *executionContext) _Series_urls(ctx context.Context, field graphql.Coll
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _SeriesResult_series(ctx context.Context, field graphql.CollectedField, obj *SeriesResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "SeriesResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Series, nil
+	})
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*maco.Series)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOSeries2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _SeriesResult_pageInfo(ctx context.Context, field graphql.CollectedField, obj *SeriesResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "SeriesResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PageInfo, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*PageInfo)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _SeriesResult_totalCount(ctx context.Context, field graphql.CollectedField, obj *SeriesResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "SeriesResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TotalCount, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _StoriesResult_stories(ctx context.Context, field graphql.CollectedField, obj *StoriesResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "StoriesResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Stories, nil
+	})
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*maco.Story)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _StoriesResult_pageInfo(ctx context.Context, field graphql.CollectedField, obj *StoriesResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "StoriesResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PageInfo, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*PageInfo)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _StoriesResult_totalCount(ctx context.Context, field graphql.CollectedField, obj *StoriesResult) graphql.Marshaler {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
+	rctx := &graphql.ResolverContext{
+		Object:   "StoriesResult",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.TotalCount, nil
+	})
+	if resTmp == nil {
+		if !ec.HasError(rctx) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Story_characters(ctx context.Context, field graphql.CollectedField, obj *maco.Story) graphql.Marshaler {
@@ -5316,6 +6281,40 @@ func (ec *executionContext) _Character(ctx context.Context, sel ast.SelectionSet
 	return out
 }
 
+var charactersResultImplementors = []string{"CharactersResult"}
+
+func (ec *executionContext) _CharactersResult(ctx context.Context, sel ast.SelectionSet, obj *CharactersResult) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, charactersResultImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CharactersResult")
+		case "characters":
+			out.Values[i] = ec._CharactersResult_characters(ctx, field, obj)
+		case "pageInfo":
+			out.Values[i] = ec._CharactersResult_pageInfo(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "totalCount":
+			out.Values[i] = ec._CharactersResult_totalCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var comicImplementors = []string{"Comic"}
 
 func (ec *executionContext) _Comic(ctx context.Context, sel ast.SelectionSet, obj *maco.Comic) graphql.Marshaler {
@@ -5533,6 +6532,40 @@ func (ec *executionContext) _ComicPrice(ctx context.Context, sel ast.SelectionSe
 	return out
 }
 
+var comicsResultImplementors = []string{"ComicsResult"}
+
+func (ec *executionContext) _ComicsResult(ctx context.Context, sel ast.SelectionSet, obj *ComicsResult) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, comicsResultImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("ComicsResult")
+		case "comics":
+			out.Values[i] = ec._ComicsResult_comics(ctx, field, obj)
+		case "pageInfo":
+			out.Values[i] = ec._ComicsResult_pageInfo(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "totalCount":
+			out.Values[i] = ec._ComicsResult_totalCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var creatorImplementors = []string{"Creator"}
 
 func (ec *executionContext) _Creator(ctx context.Context, sel ast.SelectionSet, obj *maco.Creator) graphql.Marshaler {
@@ -5612,6 +6645,40 @@ func (ec *executionContext) _Creator(ctx context.Context, sel ast.SelectionSet, 
 			out.Values[i] = ec._Creator_thumbnail(ctx, field, obj)
 		case "urls":
 			out.Values[i] = ec._Creator_urls(ctx, field, obj)
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var creatorsResultImplementors = []string{"CreatorsResult"}
+
+func (ec *executionContext) _CreatorsResult(ctx context.Context, sel ast.SelectionSet, obj *CreatorsResult) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, creatorsResultImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatorsResult")
+		case "creators":
+			out.Values[i] = ec._CreatorsResult_creators(ctx, field, obj)
+		case "pageInfo":
+			out.Values[i] = ec._CreatorsResult_pageInfo(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "totalCount":
+			out.Values[i] = ec._CreatorsResult_totalCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -5729,6 +6796,72 @@ func (ec *executionContext) _Event(ctx context.Context, sel ast.SelectionSet, ob
 	return out
 }
 
+var eventsResultImplementors = []string{"EventsResult"}
+
+func (ec *executionContext) _EventsResult(ctx context.Context, sel ast.SelectionSet, obj *EventsResult) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, eventsResultImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("EventsResult")
+		case "events":
+			out.Values[i] = ec._EventsResult_events(ctx, field, obj)
+		case "pageInfo":
+			out.Values[i] = ec._EventsResult_pageInfo(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "totalCount":
+			out.Values[i] = ec._EventsResult_totalCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var pageInfoImplementors = []string{"PageInfo"}
+
+func (ec *executionContext) _PageInfo(ctx context.Context, sel ast.SelectionSet, obj *PageInfo) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, pageInfoImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("PageInfo")
+		case "end":
+			out.Values[i] = ec._PageInfo_end(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "hasNext":
+			out.Values[i] = ec._PageInfo_hasNext(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var queryImplementors = []string{"Query"}
 
 func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) graphql.Marshaler {
@@ -5764,6 +6897,9 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_characters(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
 				return res
 			})
 		case "comic":
@@ -5786,6 +6922,9 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_comics(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
 				return res
 			})
 		case "creator":
@@ -5808,6 +6947,9 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_creators(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
 				return res
 			})
 		case "event":
@@ -5830,6 +6972,9 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_events(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
 				return res
 			})
 		case "serie":
@@ -5852,6 +6997,9 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_series(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
 				return res
 			})
 		case "story":
@@ -5874,6 +7022,9 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_stories(ctx, field)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
 				return res
 			})
 		case "__type":
@@ -5988,6 +7139,74 @@ func (ec *executionContext) _Series(ctx context.Context, sel ast.SelectionSet, o
 			}
 		case "urls":
 			out.Values[i] = ec._Series_urls(ctx, field, obj)
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var seriesResultImplementors = []string{"SeriesResult"}
+
+func (ec *executionContext) _SeriesResult(ctx context.Context, sel ast.SelectionSet, obj *SeriesResult) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, seriesResultImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("SeriesResult")
+		case "series":
+			out.Values[i] = ec._SeriesResult_series(ctx, field, obj)
+		case "pageInfo":
+			out.Values[i] = ec._SeriesResult_pageInfo(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "totalCount":
+			out.Values[i] = ec._SeriesResult_totalCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var storiesResultImplementors = []string{"StoriesResult"}
+
+func (ec *executionContext) _StoriesResult(ctx context.Context, sel ast.SelectionSet, obj *StoriesResult) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.RequestContext, sel, storiesResultImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("StoriesResult")
+		case "stories":
+			out.Values[i] = ec._StoriesResult_stories(ctx, field, obj)
+		case "pageInfo":
+			out.Values[i] = ec._StoriesResult_pageInfo(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "totalCount":
+			out.Values[i] = ec._StoriesResult_totalCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -6453,6 +7672,20 @@ func (ec *executionContext) marshalNCharacter2ᚖgithubᚗcomᚋloivisᚋmarvel�
 	return ec._Character(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNCharactersResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx context.Context, sel ast.SelectionSet, v CharactersResult) graphql.Marshaler {
+	return ec._CharactersResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx context.Context, sel ast.SelectionSet, v *CharactersResult) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._CharactersResult(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNComic2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx context.Context, sel ast.SelectionSet, v maco.Comic) graphql.Marshaler {
 	return ec._Comic(ctx, sel, &v)
 }
@@ -6495,6 +7728,20 @@ func (ec *executionContext) marshalNComicPrice2ᚖgithubᚗcomᚋloivisᚋmarvel
 	return ec._ComicPrice(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNComicsResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx context.Context, sel ast.SelectionSet, v ComicsResult) graphql.Marshaler {
+	return ec._ComicsResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx context.Context, sel ast.SelectionSet, v *ComicsResult) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._ComicsResult(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNCreator2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx context.Context, sel ast.SelectionSet, v maco.Creator) graphql.Marshaler {
 	return ec._Creator(ctx, sel, &v)
 }
@@ -6509,6 +7756,20 @@ func (ec *executionContext) marshalNCreator2ᚖgithubᚗcomᚋloivisᚋmarvelᚑ
 	return ec._Creator(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNCreatorsResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx context.Context, sel ast.SelectionSet, v CreatorsResult) graphql.Marshaler {
+	return ec._CreatorsResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx context.Context, sel ast.SelectionSet, v *CreatorsResult) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._CreatorsResult(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNEvent2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx context.Context, sel ast.SelectionSet, v maco.Event) graphql.Marshaler {
 	return ec._Event(ctx, sel, &v)
 }
@@ -6521,6 +7782,20 @@ func (ec *executionContext) marshalNEvent2ᚖgithubᚗcomᚋloivisᚋmarvelᚑco
 		return graphql.Null
 	}
 	return ec._Event(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNEventsResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx context.Context, sel ast.SelectionSet, v EventsResult) graphql.Marshaler {
+	return ec._EventsResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx context.Context, sel ast.SelectionSet, v *EventsResult) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._EventsResult(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNFloat2float64(ctx context.Context, v interface{}) (float64, error) {
@@ -6551,6 +7826,34 @@ func (ec *executionContext) marshalNID2int(ctx context.Context, sel ast.Selectio
 	return res
 }
 
+func (ec *executionContext) unmarshalNInt2int(ctx context.Context, v interface{}) (int, error) {
+	return graphql.UnmarshalInt(v)
+}
+
+func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.SelectionSet, v int) graphql.Marshaler {
+	res := graphql.MarshalInt(v)
+	if res == graphql.Null {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+	}
+	return res
+}
+
+func (ec *executionContext) marshalNPageInfo2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v PageInfo) graphql.Marshaler {
+	return ec._PageInfo(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNPageInfo2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐPageInfo(ctx context.Context, sel ast.SelectionSet, v *PageInfo) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._PageInfo(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNSeries2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx context.Context, sel ast.SelectionSet, v maco.Series) graphql.Marshaler {
 	return ec._Series(ctx, sel, &v)
 }
@@ -6563,6 +7866,34 @@ func (ec *executionContext) marshalNSeries2ᚖgithubᚗcomᚋloivisᚋmarvelᚑc
 		return graphql.Null
 	}
 	return ec._Series(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNSeriesResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx context.Context, sel ast.SelectionSet, v SeriesResult) graphql.Marshaler {
+	return ec._SeriesResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx context.Context, sel ast.SelectionSet, v *SeriesResult) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._SeriesResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNStoriesResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx context.Context, sel ast.SelectionSet, v StoriesResult) graphql.Marshaler {
+	return ec._StoriesResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx context.Context, sel ast.SelectionSet, v *StoriesResult) graphql.Marshaler {
+	if v == nil {
+		if !ec.HasError(graphql.GetResolverContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._StoriesResult(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNStory2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx context.Context, sel ast.SelectionSet, v maco.Story) graphql.Marshaler {

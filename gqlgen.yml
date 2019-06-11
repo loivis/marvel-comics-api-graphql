@@ -36,8 +36,8 @@ models:
     model: github.com/loivis/marvel-comics-api-data-loader/maco.Story
   ID:
     model:
-      - github.com/99designs/gqlgen/graphql.IntID
       - github.com/99designs/gqlgen/graphql.ID
+      - github.com/99designs/gqlgen/graphql.IntID
   ComicDate:
     model: github.com/loivis/marvel-comics-api-data-loader/maco.ComicDate
   ComicPrice:

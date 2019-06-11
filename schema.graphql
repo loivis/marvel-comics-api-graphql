@@ -110,7 +110,6 @@ type Story {
     type: String!
 }
 
-
 type ComicDate {
 	date: String!
 	type: String!
@@ -132,17 +131,58 @@ type URL {
     url: String!
 }
 
+type CharactersResult {
+    characters: [Character!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type ComicsResult {
+    comics: [Comic!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type CreatorsResult {
+    creators: [Creator!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type EventsResult {
+    events: [Event!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type SeriesResult {
+    series: [Series!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type StoriesResult {
+    stories: [Story!]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type PageInfo {
+    end: Int!
+    hasNext: Boolean!
+}
+
 type Query {
-  character(input: Int): Character
-  characters: [Character!]
-  comic(input: Int): Comic
-  comics: [Comic!]
-  creator(input: Int): Creator
-  creators: [Creator!]
-  event(input: Int): Event
-  events: [Event!]
-  serie(input: Int): Series
-  series: [Series!]
-  story(input: Int): Story
-  stories: [Story!]
+    character(id: Int): Character
+    characters(first: Int = 100, after: Int = 0): CharactersResult!
+    comic(id: Int): Comic
+    comics(first: Int = 100, after: Int = 0): ComicsResult!
+    creator(id: Int): Creator
+    creators(first: Int = 100, after: Int = 0): CreatorsResult!
+    event(id: Int): Event
+    events(first: Int = 100, after: Int = 0): EventsResult!
+    serie(id: Int): Series
+    series(first: Int = 100, after: Int = 0): SeriesResult!
+    story(id: Int): Story
+    stories(first: Int = 100, after: Int = 0): StoriesResult!
 }
