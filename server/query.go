@@ -13,7 +13,7 @@ func (r *queryResolver) Character(ctx context.Context, id *int) (*maco.Character
 }
 
 func (r *queryResolver) Characters(ctx context.Context) ([]*maco.Character, error) {
-	panic("not implemented")
+	return r.store.Characters(ctx)
 }
 
 func (r *queryResolver) Comic(ctx context.Context, id *int) (*maco.Comic, error) {
@@ -21,7 +21,7 @@ func (r *queryResolver) Comic(ctx context.Context, id *int) (*maco.Comic, error)
 }
 
 func (r *queryResolver) Comics(ctx context.Context) ([]*maco.Comic, error) {
-	panic("not implemented")
+	return r.store.Comics(ctx)
 }
 
 func (r *queryResolver) Creator(ctx context.Context, id *int) (*maco.Creator, error) {
@@ -29,7 +29,7 @@ func (r *queryResolver) Creator(ctx context.Context, id *int) (*maco.Creator, er
 }
 
 func (r *queryResolver) Creators(ctx context.Context) ([]*maco.Creator, error) {
-	panic("not implemented")
+	return r.store.Creators(ctx)
 }
 
 func (r *queryResolver) Event(ctx context.Context, id *int) (*maco.Event, error) {
@@ -37,7 +37,7 @@ func (r *queryResolver) Event(ctx context.Context, id *int) (*maco.Event, error)
 }
 
 func (r *queryResolver) Events(ctx context.Context) ([]*maco.Event, error) {
-	panic("not implemented")
+	return r.store.Events(ctx)
 }
 
 func (r *queryResolver) Serie(ctx context.Context, id *int) (*maco.Series, error) {
@@ -45,7 +45,7 @@ func (r *queryResolver) Serie(ctx context.Context, id *int) (*maco.Series, error
 }
 
 func (r *queryResolver) Series(ctx context.Context) ([]*maco.Series, error) {
-	panic("not implemented")
+	return r.store.Series(ctx)
 }
 
 func (r *queryResolver) Story(ctx context.Context, id *int) (*maco.Story, error) {
@@ -53,5 +53,5 @@ func (r *queryResolver) Story(ctx context.Context, id *int) (*maco.Story, error)
 }
 
 func (r *queryResolver) Stories(ctx context.Context) ([]*maco.Story, error) {
-	panic("not implemented")
+	return r.store.Stories(ctx)
 }
