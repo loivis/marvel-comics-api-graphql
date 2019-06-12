@@ -1,0 +1,9 @@
+runtime: go112
+
+main: ./
+
+env: standard
+
+env_variables:
+  MONGODB_URI: "mongodb://localhost:27017"
+  MONGODB_DATABASE: "maco"
