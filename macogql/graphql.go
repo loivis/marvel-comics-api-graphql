@@ -50,14 +50,14 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Character struct {
-		Comics      func(childComplexity int) int
+		Comics      func(childComplexity int, first *int, after *int) int
 		Description func(childComplexity int) int
-		Events      func(childComplexity int) int
+		Events      func(childComplexity int, first *int, after *int) int
 		ID          func(childComplexity int) int
 		Modified    func(childComplexity int) int
 		Name        func(childComplexity int) int
-		Series      func(childComplexity int) int
-		Stories     func(childComplexity int) int
+		Series      func(childComplexity int, first *int, after *int) int
+		Stories     func(childComplexity int, first *int, after *int) int
 		Thumbnail   func(childComplexity int) int
 		URLs        func(childComplexity int) int
 	}
@@ -69,16 +69,16 @@ type ComplexityRoot struct {
 	}
 
 	Comic struct {
-		Characters         func(childComplexity int) int
-		CollectedIssues    func(childComplexity int) int
-		Collections        func(childComplexity int) int
-		Creators           func(childComplexity int) int
+		Characters         func(childComplexity int, first *int, after *int) int
+		CollectedIssues    func(childComplexity int, first *int, after *int) int
+		Collections        func(childComplexity int, first *int, after *int) int
+		Creators           func(childComplexity int, first *int, after *int) int
 		Dates              func(childComplexity int) int
 		Description        func(childComplexity int) int
 		DiamondCode        func(childComplexity int) int
 		DigitalID          func(childComplexity int) int
 		EAN                func(childComplexity int) int
-		Events             func(childComplexity int) int
+		Events             func(childComplexity int, first *int, after *int) int
 		Format             func(childComplexity int) int
 		ID                 func(childComplexity int) int
 		ISBN               func(childComplexity int) int
@@ -89,14 +89,14 @@ type ComplexityRoot struct {
 		PageCount          func(childComplexity int) int
 		Prices             func(childComplexity int) int
 		SeriesID           func(childComplexity int) int
-		Stories            func(childComplexity int) int
+		Stories            func(childComplexity int, first *int, after *int) int
 		TextObjects        func(childComplexity int) int
 		Thumbnail          func(childComplexity int) int
 		Title              func(childComplexity int) int
 		UPC                func(childComplexity int) int
 		URLs               func(childComplexity int) int
 		VariantDescription func(childComplexity int) int
-		Variants           func(childComplexity int) int
+		Variants           func(childComplexity int, first *int, after *int) int
 	}
 
 	ComicDate struct {
@@ -116,16 +116,16 @@ type ComplexityRoot struct {
 	}
 
 	Creator struct {
-		Comics     func(childComplexity int) int
-		Events     func(childComplexity int) int
+		Comics     func(childComplexity int, first *int, after *int) int
+		Events     func(childComplexity int, first *int, after *int) int
 		FirstName  func(childComplexity int) int
 		FullName   func(childComplexity int) int
 		ID         func(childComplexity int) int
 		LastName   func(childComplexity int) int
 		MiddleName func(childComplexity int) int
 		Modified   func(childComplexity int) int
-		Series     func(childComplexity int) int
-		Stories    func(childComplexity int) int
+		Series     func(childComplexity int, first *int, after *int) int
+		Stories    func(childComplexity int, first *int, after *int) int
 		Suffix     func(childComplexity int) int
 		Thumbnail  func(childComplexity int) int
 		URLs       func(childComplexity int) int
@@ -138,18 +138,18 @@ type ComplexityRoot struct {
 	}
 
 	Event struct {
-		Characters  func(childComplexity int) int
-		Comics      func(childComplexity int) int
-		Creators    func(childComplexity int) int
+		Characters  func(childComplexity int, first *int, after *int) int
+		Comics      func(childComplexity int, first *int, after *int) int
+		Creators    func(childComplexity int, first *int, after *int) int
 		Description func(childComplexity int) int
 		End         func(childComplexity int) int
 		ID          func(childComplexity int) int
 		Modified    func(childComplexity int) int
 		Next        func(childComplexity int) int
 		Previous    func(childComplexity int) int
-		Series      func(childComplexity int) int
+		Series      func(childComplexity int, first *int, after *int) int
 		Start       func(childComplexity int) int
-		Stories     func(childComplexity int) int
+		Stories     func(childComplexity int, first *int, after *int) int
 		Thumbnail   func(childComplexity int) int
 		Title       func(childComplexity int) int
 		URLs        func(childComplexity int) int
@@ -182,19 +182,19 @@ type ComplexityRoot struct {
 	}
 
 	Series struct {
-		Characters  func(childComplexity int) int
-		Comics      func(childComplexity int) int
-		Creators    func(childComplexity int) int
+		Characters  func(childComplexity int, first *int, after *int) int
+		Comics      func(childComplexity int, first *int, after *int) int
+		Creators    func(childComplexity int, first *int, after *int) int
 		Description func(childComplexity int) int
 		EndYear     func(childComplexity int) int
-		Events      func(childComplexity int) int
+		Events      func(childComplexity int, first *int, after *int) int
 		ID          func(childComplexity int) int
 		Modified    func(childComplexity int) int
 		Next        func(childComplexity int) int
 		Previous    func(childComplexity int) int
 		Rating      func(childComplexity int) int
 		StartYear   func(childComplexity int) int
-		Stories     func(childComplexity int) int
+		Stories     func(childComplexity int, first *int, after *int) int
 		Thumbnail   func(childComplexity int) int
 		Title       func(childComplexity int) int
 		URLs        func(childComplexity int) int
@@ -213,15 +213,15 @@ type ComplexityRoot struct {
 	}
 
 	Story struct {
-		Characters    func(childComplexity int) int
-		Comics        func(childComplexity int) int
-		Creators      func(childComplexity int) int
+		Characters    func(childComplexity int, first *int, after *int) int
+		Comics        func(childComplexity int, first *int, after *int) int
+		Creators      func(childComplexity int, first *int, after *int) int
 		Description   func(childComplexity int) int
-		Events        func(childComplexity int) int
+		Events        func(childComplexity int, first *int, after *int) int
 		ID            func(childComplexity int) int
 		Modified      func(childComplexity int) int
 		OriginalIssue func(childComplexity int) int
-		Series        func(childComplexity int) int
+		Series        func(childComplexity int, first *int, after *int) int
 		Thumbnail     func(childComplexity int) int
 		Title         func(childComplexity int) int
 		Type          func(childComplexity int) int
@@ -240,43 +240,43 @@ type ComplexityRoot struct {
 }
 
 type CharacterResolver interface {
-	Comics(ctx context.Context, obj *maco.Character) ([]*maco.Comic, error)
+	Comics(ctx context.Context, obj *maco.Character, first *int, after *int) (*ComicsResult, error)
 
-	Events(ctx context.Context, obj *maco.Character) ([]*maco.Event, error)
+	Events(ctx context.Context, obj *maco.Character, first *int, after *int) (*EventsResult, error)
 
-	Series(ctx context.Context, obj *maco.Character) ([]*maco.Series, error)
-	Stories(ctx context.Context, obj *maco.Character) ([]*maco.Story, error)
+	Series(ctx context.Context, obj *maco.Character, first *int, after *int) (*SeriesResult, error)
+	Stories(ctx context.Context, obj *maco.Character, first *int, after *int) (*StoriesResult, error)
 }
 type ComicResolver interface {
-	Characters(ctx context.Context, obj *maco.Comic) ([]*maco.Character, error)
-	CollectedIssues(ctx context.Context, obj *maco.Comic) ([]*maco.Comic, error)
-	Collections(ctx context.Context, obj *maco.Comic) ([]*maco.Comic, error)
-	Creators(ctx context.Context, obj *maco.Comic) ([]*maco.Creator, error)
+	Characters(ctx context.Context, obj *maco.Comic, first *int, after *int) (*CharactersResult, error)
+	CollectedIssues(ctx context.Context, obj *maco.Comic, first *int, after *int) (*ComicsResult, error)
+	Collections(ctx context.Context, obj *maco.Comic, first *int, after *int) (*ComicsResult, error)
+	Creators(ctx context.Context, obj *maco.Comic, first *int, after *int) (*CreatorsResult, error)
 
-	Events(ctx context.Context, obj *maco.Comic) ([]*maco.Event, error)
+	Events(ctx context.Context, obj *maco.Comic, first *int, after *int) (*EventsResult, error)
 
-	Stories(ctx context.Context, obj *maco.Comic) ([]*maco.Story, error)
+	Stories(ctx context.Context, obj *maco.Comic, first *int, after *int) (*StoriesResult, error)
 
-	Variants(ctx context.Context, obj *maco.Comic) ([]*maco.Comic, error)
+	Variants(ctx context.Context, obj *maco.Comic, first *int, after *int) (*ComicsResult, error)
 }
 type ComicPriceResolver interface {
 	Price(ctx context.Context, obj *maco.ComicPrice) (float64, error)
 }
 type CreatorResolver interface {
-	Comics(ctx context.Context, obj *maco.Creator) ([]*maco.Comic, error)
-	Events(ctx context.Context, obj *maco.Creator) ([]*maco.Event, error)
+	Comics(ctx context.Context, obj *maco.Creator, first *int, after *int) (*ComicsResult, error)
+	Events(ctx context.Context, obj *maco.Creator, first *int, after *int) (*EventsResult, error)
 
-	Series(ctx context.Context, obj *maco.Creator) ([]*maco.Series, error)
-	Stories(ctx context.Context, obj *maco.Creator) ([]*maco.Story, error)
+	Series(ctx context.Context, obj *maco.Creator, first *int, after *int) (*SeriesResult, error)
+	Stories(ctx context.Context, obj *maco.Creator, first *int, after *int) (*StoriesResult, error)
 }
 type EventResolver interface {
-	Characters(ctx context.Context, obj *maco.Event) ([]*maco.Character, error)
-	Comics(ctx context.Context, obj *maco.Event) ([]*maco.Comic, error)
-	Creators(ctx context.Context, obj *maco.Event) ([]*maco.Creator, error)
+	Characters(ctx context.Context, obj *maco.Event, first *int, after *int) (*CharactersResult, error)
+	Comics(ctx context.Context, obj *maco.Event, first *int, after *int) (*ComicsResult, error)
+	Creators(ctx context.Context, obj *maco.Event, first *int, after *int) (*CreatorsResult, error)
 
-	Series(ctx context.Context, obj *maco.Event) ([]*maco.Series, error)
+	Series(ctx context.Context, obj *maco.Event, first *int, after *int) (*SeriesResult, error)
 
-	Stories(ctx context.Context, obj *maco.Event) ([]*maco.Story, error)
+	Stories(ctx context.Context, obj *maco.Event, first *int, after *int) (*StoriesResult, error)
 }
 type QueryResolver interface {
 	Character(ctx context.Context, id *int) (*maco.Character, error)
@@ -293,23 +293,23 @@ type QueryResolver interface {
 	Stories(ctx context.Context, first *int, after *int) (*StoriesResult, error)
 }
 type SeriesResolver interface {
-	Characters(ctx context.Context, obj *maco.Series) ([]*maco.Character, error)
-	Comics(ctx context.Context, obj *maco.Series) ([]*maco.Comic, error)
-	Creators(ctx context.Context, obj *maco.Series) ([]*maco.Creator, error)
+	Characters(ctx context.Context, obj *maco.Series, first *int, after *int) (*CharactersResult, error)
+	Comics(ctx context.Context, obj *maco.Series, first *int, after *int) (*ComicsResult, error)
+	Creators(ctx context.Context, obj *maco.Series, first *int, after *int) (*CreatorsResult, error)
 
-	Events(ctx context.Context, obj *maco.Series) ([]*maco.Event, error)
+	Events(ctx context.Context, obj *maco.Series, first *int, after *int) (*EventsResult, error)
 
-	Stories(ctx context.Context, obj *maco.Series) ([]*maco.Story, error)
+	Stories(ctx context.Context, obj *maco.Series, first *int, after *int) (*StoriesResult, error)
 }
 type StoryResolver interface {
-	Characters(ctx context.Context, obj *maco.Story) ([]*maco.Character, error)
-	Comics(ctx context.Context, obj *maco.Story) ([]*maco.Comic, error)
-	Creators(ctx context.Context, obj *maco.Story) ([]*maco.Creator, error)
+	Characters(ctx context.Context, obj *maco.Story, first *int, after *int) (*CharactersResult, error)
+	Comics(ctx context.Context, obj *maco.Story, first *int, after *int) (*ComicsResult, error)
+	Creators(ctx context.Context, obj *maco.Story, first *int, after *int) (*CreatorsResult, error)
 
-	Events(ctx context.Context, obj *maco.Story) ([]*maco.Event, error)
+	Events(ctx context.Context, obj *maco.Story, first *int, after *int) (*EventsResult, error)
 
 	OriginalIssue(ctx context.Context, obj *maco.Story) (*maco.Comic, error)
-	Series(ctx context.Context, obj *maco.Story) ([]*maco.Series, error)
+	Series(ctx context.Context, obj *maco.Story, first *int, after *int) (*SeriesResult, error)
 }
 
 type executableSchema struct {
@@ -332,7 +332,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Character.Comics(childComplexity), true
+		args, err := ec.field_Character_comics_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Character.Comics(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Character.description":
 		if e.complexity.Character.Description == nil {
@@ -346,7 +351,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Character.Events(childComplexity), true
+		args, err := ec.field_Character_events_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Character.Events(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Character.id":
 		if e.complexity.Character.ID == nil {
@@ -374,14 +384,24 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Character.Series(childComplexity), true
+		args, err := ec.field_Character_series_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Character.Series(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Character.stories":
 		if e.complexity.Character.Stories == nil {
 			break
 		}
 
-		return e.complexity.Character.Stories(childComplexity), true
+		args, err := ec.field_Character_stories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Character.Stories(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Character.thumbnail":
 		if e.complexity.Character.Thumbnail == nil {
@@ -423,28 +443,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Comic.Characters(childComplexity), true
+		args, err := ec.field_Comic_characters_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.Characters(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Comic.collectedIssues":
 		if e.complexity.Comic.CollectedIssues == nil {
 			break
 		}
 
-		return e.complexity.Comic.CollectedIssues(childComplexity), true
+		args, err := ec.field_Comic_collectedIssues_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.CollectedIssues(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Comic.collections":
 		if e.complexity.Comic.Collections == nil {
 			break
 		}
 
-		return e.complexity.Comic.Collections(childComplexity), true
+		args, err := ec.field_Comic_collections_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.Collections(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Comic.creators":
 		if e.complexity.Comic.Creators == nil {
 			break
 		}
 
-		return e.complexity.Comic.Creators(childComplexity), true
+		args, err := ec.field_Comic_creators_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.Creators(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Comic.dates":
 		if e.complexity.Comic.Dates == nil {
@@ -486,7 +526,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Comic.Events(childComplexity), true
+		args, err := ec.field_Comic_events_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.Events(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Comic.format":
 		if e.complexity.Comic.Format == nil {
@@ -563,7 +608,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Comic.Stories(childComplexity), true
+		args, err := ec.field_Comic_stories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.Stories(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Comic.textObjects":
 		if e.complexity.Comic.TextObjects == nil {
@@ -612,7 +662,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Comic.Variants(childComplexity), true
+		args, err := ec.field_Comic_variants_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Comic.Variants(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "ComicDate.date":
 		if e.complexity.ComicDate.Date == nil {
@@ -668,14 +723,24 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Creator.Comics(childComplexity), true
+		args, err := ec.field_Creator_comics_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Creator.Comics(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Creator.events":
 		if e.complexity.Creator.Events == nil {
 			break
 		}
 
-		return e.complexity.Creator.Events(childComplexity), true
+		args, err := ec.field_Creator_events_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Creator.Events(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Creator.firstName":
 		if e.complexity.Creator.FirstName == nil {
@@ -724,14 +789,24 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Creator.Series(childComplexity), true
+		args, err := ec.field_Creator_series_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Creator.Series(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Creator.stories":
 		if e.complexity.Creator.Stories == nil {
 			break
 		}
 
-		return e.complexity.Creator.Stories(childComplexity), true
+		args, err := ec.field_Creator_stories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Creator.Stories(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Creator.suffix":
 		if e.complexity.Creator.Suffix == nil {
@@ -780,21 +855,36 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Event.Characters(childComplexity), true
+		args, err := ec.field_Event_characters_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Event.Characters(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Event.comics":
 		if e.complexity.Event.Comics == nil {
 			break
 		}
 
-		return e.complexity.Event.Comics(childComplexity), true
+		args, err := ec.field_Event_comics_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Event.Comics(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Event.creators":
 		if e.complexity.Event.Creators == nil {
 			break
 		}
 
-		return e.complexity.Event.Creators(childComplexity), true
+		args, err := ec.field_Event_creators_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Event.Creators(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Event.description":
 		if e.complexity.Event.Description == nil {
@@ -843,7 +933,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Event.Series(childComplexity), true
+		args, err := ec.field_Event_series_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Event.Series(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Event.start":
 		if e.complexity.Event.Start == nil {
@@ -857,7 +952,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Event.Stories(childComplexity), true
+		args, err := ec.field_Event_stories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Event.Stories(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Event.thumbnail":
 		if e.complexity.Event.Thumbnail == nil {
@@ -1064,21 +1164,36 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Series.Characters(childComplexity), true
+		args, err := ec.field_Series_characters_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Series.Characters(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Series.comics":
 		if e.complexity.Series.Comics == nil {
 			break
 		}
 
-		return e.complexity.Series.Comics(childComplexity), true
+		args, err := ec.field_Series_comics_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Series.Comics(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Series.creators":
 		if e.complexity.Series.Creators == nil {
 			break
 		}
 
-		return e.complexity.Series.Creators(childComplexity), true
+		args, err := ec.field_Series_creators_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Series.Creators(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Series.description":
 		if e.complexity.Series.Description == nil {
@@ -1099,7 +1214,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Series.Events(childComplexity), true
+		args, err := ec.field_Series_events_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Series.Events(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Series.id":
 		if e.complexity.Series.ID == nil {
@@ -1148,7 +1268,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Series.Stories(childComplexity), true
+		args, err := ec.field_Series_stories_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Series.Stories(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Series.thumbnail":
 		if e.complexity.Series.Thumbnail == nil {
@@ -1218,21 +1343,36 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Story.Characters(childComplexity), true
+		args, err := ec.field_Story_characters_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Story.Characters(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Story.comics":
 		if e.complexity.Story.Comics == nil {
 			break
 		}
 
-		return e.complexity.Story.Comics(childComplexity), true
+		args, err := ec.field_Story_comics_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Story.Comics(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Story.creators":
 		if e.complexity.Story.Creators == nil {
 			break
 		}
 
-		return e.complexity.Story.Creators(childComplexity), true
+		args, err := ec.field_Story_creators_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Story.Creators(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Story.description":
 		if e.complexity.Story.Description == nil {
@@ -1246,7 +1386,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Story.Events(childComplexity), true
+		args, err := ec.field_Story_events_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Story.Events(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Story.id":
 		if e.complexity.Story.ID == nil {
@@ -1274,7 +1419,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			break
 		}
 
-		return e.complexity.Story.Series(childComplexity), true
+		args, err := ec.field_Story_series_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Story.Series(childComplexity, args["first"].(*int), args["after"].(*int)), true
 
 	case "Story.thumbnail":
 		if e.complexity.Story.Thumbnail == nil {
@@ -1397,29 +1547,29 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 
 var parsedSchema = gqlparser.MustLoadSchema(
 	&ast.Source{Name: "schema.graphql", Input: `type Character {
-    comics: [Comic!]
+    comics(first: Int = 20, after: Int = 0): ComicsResult
     description: String
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     id: ID!
     modified: String
     name: String
-    series: [Series!]
-    stories:[Story!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     thumbnail: String
     urls: [URL!]
 }
 
 type Comic {
-    characters: [Character!]
-    collectedIssues: [Comic!]
-    collections: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    collectedIssues(first: Int = 20, after: Int = 0): ComicsResult
+    collections(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     dates: [ComicDate!]
     description: String
     diamondCode: String
     digitalID: Int
     ean: String
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     format: String
     id: ID!
     images: [String!]
@@ -1430,79 +1580,79 @@ type Comic {
     pageCount: Int
     prices:[ComicPrice!]
     seriesID: Int
-    stories:[Story!]
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     textObjects:[TextObject!]
     thumbnail: String
     title: String
     upc: String
     urls: [URL!]
     variantDescription: String
-    variants:  [Comic!]
+    variants(first: Int = 20, after: Int = 0): ComicsResult
 }
 
 type Creator {
-    comics: [Comic!]
-    events: [Event!]
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    events(first: Int = 20, after: Int = 0): EventsResult
     firstName: String
     fullName: String!
     id: ID!
     lastName: String
     middleName: String
     modified: String
-    series: [Series!]
-    stories:[Story!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     suffix: String
     thumbnail: String
     urls: [URL!]
 }
 
 type Event {
-    characters: [Character!]
-    comics: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     description: String
     end: String
     id: ID!
     modified: String
     next: Int
     previous: Int
-    series: [Series!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
     start: String
-    stories:[Story!]
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     thumbnail: String!
     title: String!
     urls: [URL!]
 }
 
 type Series {
-    characters: [Character!]
-    comics: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     description: String
     endYear: Int
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     id: ID!
     modified: String
     next: Int
     previous: Int
     rating: String
     startYear: Int
-    stories:[Story!]
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     thumbnail: String!
     title: String!
     urls: [URL!]
 }
 
 type Story {
-    characters: [Character!]
-    comics: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     description: String
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     id: ID!
     modified: String
     originalIssue: Comic
-    series: [Series!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
     thumbnail: String!
     title: String!
     type: String!
@@ -1590,6 +1740,446 @@ type Query {
 // endregion ************************** generated!.gotpl **************************
 
 // region    ***************************** args.gotpl *****************************
+
+func (ec *executionContext) field_Character_comics_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Character_events_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Character_series_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Character_stories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_characters_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_collectedIssues_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_collections_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_creators_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_events_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_stories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Comic_variants_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Creator_comics_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Creator_events_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Creator_series_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Creator_stories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Event_characters_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Event_comics_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Event_creators_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Event_series_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Event_stories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
 
 func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
@@ -1821,6 +2411,226 @@ func (ec *executionContext) field_Query_story_args(ctx context.Context, rawArgs 
 	return args, nil
 }
 
+func (ec *executionContext) field_Series_characters_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Series_comics_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Series_creators_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Series_events_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Series_stories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Story_characters_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Story_comics_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Story_creators_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Story_events_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Story_series_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *int
+	if tmp, ok := rawArgs["first"]; ok {
+		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["first"] = arg0
+	var arg1 *int
+	if tmp, ok := rawArgs["after"]; ok {
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["after"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field___Type_enumValues_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -1863,18 +2673,25 @@ func (ec *executionContext) _Character_comics(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Character_comics_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Character().Comics(rctx, obj)
+		return ec.resolvers.Character().Comics(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Character_description(ctx context.Context, field graphql.CollectedField, obj *maco.Character) graphql.Marshaler {
@@ -1911,18 +2728,25 @@ func (ec *executionContext) _Character_events(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Character_events_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Character().Events(rctx, obj)
+		return ec.resolvers.Character().Events(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Event)
+	res := resTmp.(*EventsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+	return ec.marshalOEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Character_id(ctx context.Context, field graphql.CollectedField, obj *maco.Character) graphql.Marshaler {
@@ -2010,18 +2834,25 @@ func (ec *executionContext) _Character_series(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Character_series_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Character().Series(rctx, obj)
+		return ec.resolvers.Character().Series(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Series)
+	res := resTmp.(*SeriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOSeries2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx, field.Selections, res)
+	return ec.marshalOSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Character_stories(ctx context.Context, field graphql.CollectedField, obj *maco.Character) graphql.Marshaler {
@@ -2034,18 +2865,25 @@ func (ec *executionContext) _Character_stories(ctx context.Context, field graphq
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Character_stories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Character().Stories(rctx, obj)
+		return ec.resolvers.Character().Stories(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Story)
+	res := resTmp.(*StoriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+	return ec.marshalOStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Character_thumbnail(ctx context.Context, field graphql.CollectedField, obj *maco.Character) graphql.Marshaler {
@@ -2184,18 +3022,25 @@ func (ec *executionContext) _Comic_characters(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_characters_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().Characters(rctx, obj)
+		return ec.resolvers.Comic().Characters(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Character)
+	res := resTmp.(*CharactersResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCharacter2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCharacter(ctx, field.Selections, res)
+	return ec.marshalOCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_collectedIssues(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2208,18 +3053,25 @@ func (ec *executionContext) _Comic_collectedIssues(ctx context.Context, field gr
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_collectedIssues_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().CollectedIssues(rctx, obj)
+		return ec.resolvers.Comic().CollectedIssues(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_collections(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2232,18 +3084,25 @@ func (ec *executionContext) _Comic_collections(ctx context.Context, field graphq
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_collections_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().Collections(rctx, obj)
+		return ec.resolvers.Comic().Collections(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_creators(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2256,18 +3115,25 @@ func (ec *executionContext) _Comic_creators(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_creators_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().Creators(rctx, obj)
+		return ec.resolvers.Comic().Creators(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Creator)
+	res := resTmp.(*CreatorsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCreator2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx, field.Selections, res)
+	return ec.marshalOCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_dates(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2400,18 +3266,25 @@ func (ec *executionContext) _Comic_events(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_events_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().Events(rctx, obj)
+		return ec.resolvers.Comic().Events(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Event)
+	res := resTmp.(*EventsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+	return ec.marshalOEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_format(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2667,18 +3540,25 @@ func (ec *executionContext) _Comic_stories(ctx context.Context, field graphql.Co
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_stories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().Stories(rctx, obj)
+		return ec.resolvers.Comic().Stories(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Story)
+	res := resTmp.(*StoriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+	return ec.marshalOStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Comic_textObjects(ctx context.Context, field graphql.CollectedField, obj *maco.Comic) graphql.Marshaler {
@@ -2835,18 +3715,25 @@ func (ec *executionContext) _Comic_variants(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Comic_variants_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Comic().Variants(rctx, obj)
+		return ec.resolvers.Comic().Variants(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _ComicDate_date(ctx context.Context, field graphql.CollectedField, obj *maco.ComicDate) graphql.Marshaler {
@@ -3045,18 +3932,25 @@ func (ec *executionContext) _Creator_comics(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Creator_comics_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Creator().Comics(rctx, obj)
+		return ec.resolvers.Creator().Comics(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Creator_events(ctx context.Context, field graphql.CollectedField, obj *maco.Creator) graphql.Marshaler {
@@ -3069,18 +3963,25 @@ func (ec *executionContext) _Creator_events(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Creator_events_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Creator().Events(rctx, obj)
+		return ec.resolvers.Creator().Events(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Event)
+	res := resTmp.(*EventsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+	return ec.marshalOEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Creator_firstName(ctx context.Context, field graphql.CollectedField, obj *maco.Creator) graphql.Marshaler {
@@ -3243,18 +4144,25 @@ func (ec *executionContext) _Creator_series(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Creator_series_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Creator().Series(rctx, obj)
+		return ec.resolvers.Creator().Series(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Series)
+	res := resTmp.(*SeriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOSeries2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx, field.Selections, res)
+	return ec.marshalOSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Creator_stories(ctx context.Context, field graphql.CollectedField, obj *maco.Creator) graphql.Marshaler {
@@ -3267,18 +4175,25 @@ func (ec *executionContext) _Creator_stories(ctx context.Context, field graphql.
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Creator_stories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Creator().Stories(rctx, obj)
+		return ec.resolvers.Creator().Stories(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Story)
+	res := resTmp.(*StoriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+	return ec.marshalOStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Creator_suffix(ctx context.Context, field graphql.CollectedField, obj *maco.Creator) graphql.Marshaler {
@@ -3441,18 +4356,25 @@ func (ec *executionContext) _Event_characters(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Event_characters_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Event().Characters(rctx, obj)
+		return ec.resolvers.Event().Characters(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Character)
+	res := resTmp.(*CharactersResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCharacter2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCharacter(ctx, field.Selections, res)
+	return ec.marshalOCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Event_comics(ctx context.Context, field graphql.CollectedField, obj *maco.Event) graphql.Marshaler {
@@ -3465,18 +4387,25 @@ func (ec *executionContext) _Event_comics(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Event_comics_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Event().Comics(rctx, obj)
+		return ec.resolvers.Event().Comics(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Event_creators(ctx context.Context, field graphql.CollectedField, obj *maco.Event) graphql.Marshaler {
@@ -3489,18 +4418,25 @@ func (ec *executionContext) _Event_creators(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Event_creators_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Event().Creators(rctx, obj)
+		return ec.resolvers.Event().Creators(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Creator)
+	res := resTmp.(*CreatorsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCreator2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx, field.Selections, res)
+	return ec.marshalOCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Event_description(ctx context.Context, field graphql.CollectedField, obj *maco.Event) graphql.Marshaler {
@@ -3660,18 +4596,25 @@ func (ec *executionContext) _Event_series(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Event_series_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Event().Series(rctx, obj)
+		return ec.resolvers.Event().Series(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Series)
+	res := resTmp.(*SeriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOSeries2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx, field.Selections, res)
+	return ec.marshalOSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Event_start(ctx context.Context, field graphql.CollectedField, obj *maco.Event) graphql.Marshaler {
@@ -3708,18 +4651,25 @@ func (ec *executionContext) _Event_stories(ctx context.Context, field graphql.Co
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Event_stories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Event().Stories(rctx, obj)
+		return ec.resolvers.Event().Stories(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Story)
+	res := resTmp.(*StoriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+	return ec.marshalOStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Event_thumbnail(ctx context.Context, field graphql.CollectedField, obj *maco.Event) graphql.Marshaler {
@@ -4387,18 +5337,25 @@ func (ec *executionContext) _Series_characters(ctx context.Context, field graphq
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Series_characters_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Series().Characters(rctx, obj)
+		return ec.resolvers.Series().Characters(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Character)
+	res := resTmp.(*CharactersResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCharacter2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCharacter(ctx, field.Selections, res)
+	return ec.marshalOCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Series_comics(ctx context.Context, field graphql.CollectedField, obj *maco.Series) graphql.Marshaler {
@@ -4411,18 +5368,25 @@ func (ec *executionContext) _Series_comics(ctx context.Context, field graphql.Co
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Series_comics_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Series().Comics(rctx, obj)
+		return ec.resolvers.Series().Comics(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Series_creators(ctx context.Context, field graphql.CollectedField, obj *maco.Series) graphql.Marshaler {
@@ -4435,18 +5399,25 @@ func (ec *executionContext) _Series_creators(ctx context.Context, field graphql.
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Series_creators_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Series().Creators(rctx, obj)
+		return ec.resolvers.Series().Creators(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Creator)
+	res := resTmp.(*CreatorsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCreator2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx, field.Selections, res)
+	return ec.marshalOCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Series_description(ctx context.Context, field graphql.CollectedField, obj *maco.Series) graphql.Marshaler {
@@ -4507,18 +5478,25 @@ func (ec *executionContext) _Series_events(ctx context.Context, field graphql.Co
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Series_events_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Series().Events(rctx, obj)
+		return ec.resolvers.Series().Events(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Event)
+	res := resTmp.(*EventsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+	return ec.marshalOEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Series_id(ctx context.Context, field graphql.CollectedField, obj *maco.Series) graphql.Marshaler {
@@ -4678,18 +5656,25 @@ func (ec *executionContext) _Series_stories(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Series_stories_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Series().Stories(rctx, obj)
+		return ec.resolvers.Series().Stories(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Story)
+	res := resTmp.(*StoriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOStory2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx, field.Selections, res)
+	return ec.marshalOStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Series_thumbnail(ctx context.Context, field graphql.CollectedField, obj *maco.Series) graphql.Marshaler {
@@ -4936,18 +5921,25 @@ func (ec *executionContext) _Story_characters(ctx context.Context, field graphql
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Story_characters_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Story().Characters(rctx, obj)
+		return ec.resolvers.Story().Characters(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Character)
+	res := resTmp.(*CharactersResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCharacter2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCharacter(ctx, field.Selections, res)
+	return ec.marshalOCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Story_comics(ctx context.Context, field graphql.CollectedField, obj *maco.Story) graphql.Marshaler {
@@ -4960,18 +5952,25 @@ func (ec *executionContext) _Story_comics(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Story_comics_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Story().Comics(rctx, obj)
+		return ec.resolvers.Story().Comics(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Comic)
+	res := resTmp.(*ComicsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOComic2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx, field.Selections, res)
+	return ec.marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Story_creators(ctx context.Context, field graphql.CollectedField, obj *maco.Story) graphql.Marshaler {
@@ -4984,18 +5983,25 @@ func (ec *executionContext) _Story_creators(ctx context.Context, field graphql.C
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Story_creators_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Story().Creators(rctx, obj)
+		return ec.resolvers.Story().Creators(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Creator)
+	res := resTmp.(*CreatorsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOCreator2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx, field.Selections, res)
+	return ec.marshalOCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Story_description(ctx context.Context, field graphql.CollectedField, obj *maco.Story) graphql.Marshaler {
@@ -5032,18 +6038,25 @@ func (ec *executionContext) _Story_events(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Story_events_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Story().Events(rctx, obj)
+		return ec.resolvers.Story().Events(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Event)
+	res := resTmp.(*EventsResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOEvent2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx, field.Selections, res)
+	return ec.marshalOEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Story_id(ctx context.Context, field graphql.CollectedField, obj *maco.Story) graphql.Marshaler {
@@ -5131,18 +6144,25 @@ func (ec *executionContext) _Story_series(ctx context.Context, field graphql.Col
 		IsMethod: true,
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Story_series_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	rctx.Args = args
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Story().Series(rctx, obj)
+		return ec.resolvers.Story().Series(rctx, obj, args["first"].(*int), args["after"].(*int))
 	})
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*maco.Series)
+	res := resTmp.(*SeriesResult)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOSeries2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐSeries(ctx, field.Selections, res)
+	return ec.marshalOSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Story_thumbnail(ctx context.Context, field graphql.CollectedField, obj *maco.Story) graphql.Marshaler {
@@ -8252,6 +9272,17 @@ func (ec *executionContext) marshalOCharacter2ᚖgithubᚗcomᚋloivisᚋmarvel�
 	return ec._Character(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalOCharactersResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx context.Context, sel ast.SelectionSet, v CharactersResult) graphql.Marshaler {
+	return ec._CharactersResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOCharactersResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCharactersResult(ctx context.Context, sel ast.SelectionSet, v *CharactersResult) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._CharactersResult(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalOComic2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐComic(ctx context.Context, sel ast.SelectionSet, v maco.Comic) graphql.Marshaler {
 	return ec._Comic(ctx, sel, &v)
 }
@@ -8383,6 +9414,17 @@ func (ec *executionContext) marshalOComicPrice2ᚕᚖgithubᚗcomᚋloivisᚋmar
 	return ret
 }
 
+func (ec *executionContext) marshalOComicsResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx context.Context, sel ast.SelectionSet, v ComicsResult) graphql.Marshaler {
+	return ec._ComicsResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOComicsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐComicsResult(ctx context.Context, sel ast.SelectionSet, v *ComicsResult) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._ComicsResult(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalOCreator2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐCreator(ctx context.Context, sel ast.SelectionSet, v maco.Creator) graphql.Marshaler {
 	return ec._Creator(ctx, sel, &v)
 }
@@ -8434,6 +9476,17 @@ func (ec *executionContext) marshalOCreator2ᚖgithubᚗcomᚋloivisᚋmarvelᚑ
 	return ec._Creator(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalOCreatorsResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx context.Context, sel ast.SelectionSet, v CreatorsResult) graphql.Marshaler {
+	return ec._CreatorsResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOCreatorsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐCreatorsResult(ctx context.Context, sel ast.SelectionSet, v *CreatorsResult) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._CreatorsResult(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalOEvent2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐEvent(ctx context.Context, sel ast.SelectionSet, v maco.Event) graphql.Marshaler {
 	return ec._Event(ctx, sel, &v)
 }
@@ -8483,6 +9536,17 @@ func (ec *executionContext) marshalOEvent2ᚖgithubᚗcomᚋloivisᚋmarvelᚑco
 		return graphql.Null
 	}
 	return ec._Event(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalOEventsResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx context.Context, sel ast.SelectionSet, v EventsResult) graphql.Marshaler {
+	return ec._EventsResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOEventsResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐEventsResult(ctx context.Context, sel ast.SelectionSet, v *EventsResult) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._EventsResult(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalOFloat2float64(ctx context.Context, v interface{}) (float64, error) {
@@ -8565,6 +9629,28 @@ func (ec *executionContext) marshalOSeries2ᚖgithubᚗcomᚋloivisᚋmarvelᚑc
 		return graphql.Null
 	}
 	return ec._Series(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalOSeriesResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx context.Context, sel ast.SelectionSet, v SeriesResult) graphql.Marshaler {
+	return ec._SeriesResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOSeriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐSeriesResult(ctx context.Context, sel ast.SelectionSet, v *SeriesResult) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._SeriesResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalOStoriesResult2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx context.Context, sel ast.SelectionSet, v StoriesResult) graphql.Marshaler {
+	return ec._StoriesResult(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOStoriesResult2ᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑgraphqlᚋmacogqlᚐStoriesResult(ctx context.Context, sel ast.SelectionSet, v *StoriesResult) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._StoriesResult(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalOStory2githubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐStory(ctx context.Context, sel ast.SelectionSet, v maco.Story) graphql.Marshaler {

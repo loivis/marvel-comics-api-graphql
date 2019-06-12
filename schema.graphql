@@ -1,27 +1,27 @@
 type Character {
-    comics: [Comic!]
+    comics(first: Int = 20, after: Int = 0): ComicsResult
     description: String
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     id: ID!
     modified: String
     name: String
-    series: [Series!]
-    stories:[Story!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     thumbnail: String
     urls: [URL!]
 }
 
 type Comic {
-    characters: [Character!]
-    collectedIssues: [Comic!]
-    collections: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    collectedIssues(first: Int = 20, after: Int = 0): ComicsResult
+    collections(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     dates: [ComicDate!]
     description: String
     diamondCode: String
     digitalID: Int
     ean: String
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     format: String
     id: ID!
     images: [String!]
@@ -32,79 +32,79 @@ type Comic {
     pageCount: Int
     prices:[ComicPrice!]
     seriesID: Int
-    stories:[Story!]
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     textObjects:[TextObject!]
     thumbnail: String
     title: String
     upc: String
     urls: [URL!]
     variantDescription: String
-    variants:  [Comic!]
+    variants(first: Int = 20, after: Int = 0): ComicsResult
 }
 
 type Creator {
-    comics: [Comic!]
-    events: [Event!]
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    events(first: Int = 20, after: Int = 0): EventsResult
     firstName: String
     fullName: String!
     id: ID!
     lastName: String
     middleName: String
     modified: String
-    series: [Series!]
-    stories:[Story!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     suffix: String
     thumbnail: String
     urls: [URL!]
 }
 
 type Event {
-    characters: [Character!]
-    comics: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     description: String
     end: String
     id: ID!
     modified: String
     next: Int
     previous: Int
-    series: [Series!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
     start: String
-    stories:[Story!]
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     thumbnail: String!
     title: String!
     urls: [URL!]
 }
 
 type Series {
-    characters: [Character!]
-    comics: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     description: String
     endYear: Int
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     id: ID!
     modified: String
     next: Int
     previous: Int
     rating: String
     startYear: Int
-    stories:[Story!]
+    stories(first: Int = 20, after: Int = 0): StoriesResult
     thumbnail: String!
     title: String!
     urls: [URL!]
 }
 
 type Story {
-    characters: [Character!]
-    comics: [Comic!]
-    creators: [Creator!]
+    characters(first: Int = 20, after: Int = 0): CharactersResult
+    comics(first: Int = 20, after: Int = 0): ComicsResult
+    creators(first: Int = 20, after: Int = 0): CreatorsResult
     description: String
-    events: [Event!]
+    events(first: Int = 20, after: Int = 0): EventsResult
     id: ID!
     modified: String
     originalIssue: Comic
-    series: [Series!]
+    series(first: Int = 20, after: Int = 0): SeriesResult
     thumbnail: String!
     title: String!
     type: String!

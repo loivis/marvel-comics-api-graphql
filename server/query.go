@@ -18,7 +18,11 @@ func (r *queryResolver) Characters(ctx context.Context, first *int, after *int) 
 	if err != nil {
 		return nil, err
 	}
+
 	length := len(res)
+	if length == 0 {
+		return nil, nil
+	}
 
 	from, to := fromTo(*after, *after+*first, length)
 
@@ -41,7 +45,11 @@ func (r *queryResolver) Comics(ctx context.Context, first *int, after *int) (*ma
 	if err != nil {
 		return nil, err
 	}
+
 	length := len(res)
+	if length == 0 {
+		return nil, nil
+	}
 
 	from, to := fromTo(*after, *after+*first, length)
 
@@ -64,7 +72,11 @@ func (r *queryResolver) Creators(ctx context.Context, first *int, after *int) (*
 	if err != nil {
 		return nil, err
 	}
+
 	length := len(res)
+	if length == 0 {
+		return nil, nil
+	}
 
 	from, to := fromTo(*after, *after+*first, length)
 
@@ -87,7 +99,11 @@ func (r *queryResolver) Events(ctx context.Context, first *int, after *int) (*ma
 	if err != nil {
 		return nil, err
 	}
+
 	length := len(res)
+	if length == 0 {
+		return nil, nil
+	}
 
 	from, to := fromTo(*after, *after+*first, length)
 
@@ -110,7 +126,11 @@ func (r *queryResolver) Series(ctx context.Context, first *int, after *int) (*ma
 	if err != nil {
 		return nil, err
 	}
+
 	length := len(res)
+	if length == 0 {
+		return nil, nil
+	}
 
 	from, to := fromTo(*after, *after+*first, length)
 
@@ -133,7 +153,11 @@ func (r *queryResolver) Stories(ctx context.Context, first *int, after *int) (*m
 	if err != nil {
 		return nil, err
 	}
+
 	length := len(res)
+	if length == 0 {
+		return nil, nil
+	}
 
 	from, to := fromTo(*after, *after+*first, length)
 

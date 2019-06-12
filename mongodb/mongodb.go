@@ -55,6 +55,10 @@ func (m *MongoDB) CharacterByID(ctx context.Context, id int) (*maco.Character, e
 	var out maco.Character
 	err := col.FindOne(ctx, bson.D{{Key: "id", Value: id}}).Decode(&out)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
@@ -109,6 +113,10 @@ func (m *MongoDB) ComicByID(ctx context.Context, id int) (*maco.Comic, error) {
 	var out maco.Comic
 	err := col.FindOne(ctx, bson.D{{Key: "id", Value: id}}).Decode(&out)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
@@ -163,6 +171,10 @@ func (m *MongoDB) CreatorByID(ctx context.Context, id int) (*maco.Creator, error
 	var out maco.Creator
 	err := col.FindOne(ctx, bson.D{{Key: "id", Value: id}}).Decode(&out)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
@@ -217,6 +229,10 @@ func (m *MongoDB) EventByID(ctx context.Context, id int) (*maco.Event, error) {
 	var out maco.Event
 	err := col.FindOne(ctx, bson.D{{Key: "id", Value: id}}).Decode(&out)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
@@ -271,6 +287,10 @@ func (m *MongoDB) SeriesByID(ctx context.Context, id int) (*maco.Series, error) 
 	var out maco.Series
 	err := col.FindOne(ctx, bson.D{{Key: "id", Value: id}}).Decode(&out)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
@@ -325,6 +345,10 @@ func (m *MongoDB) StoryByID(ctx context.Context, id int) (*maco.Story, error) {
 	var out maco.Story
 	err := col.FindOne(ctx, bson.D{{Key: "id", Value: id}}).Decode(&out)
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
