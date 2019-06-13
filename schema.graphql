@@ -173,16 +173,16 @@ type PageInfo {
 }
 
 type Query {
-    character(id: Int): Character
+    character(id: Int!): Character
     characters(first: Int = 100, after: Int = 0): CharactersResult!
-    comic(id: Int): Comic
+    comic(id: Int!): Comic
     comics(first: Int = 100, after: Int = 0): ComicsResult!
-    creator(id: Int): Creator
+    creator(id: Int!): Creator
     creators(first: Int = 100, after: Int = 0): CreatorsResult!
-    event(id: Int): Event
+    event(id: Int!): Event
     events(first: Int = 100, after: Int = 0): EventsResult!
-    serie(id: Int): Series
+    serie(id: Int!): Series
     series(first: Int = 100, after: Int = 0): SeriesResult!
-    story(id: Int): Story
+    story(id: Int!): Story
     stories(first: Int = 100, after: Int = 0): StoriesResult!
 }

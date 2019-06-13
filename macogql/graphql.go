@@ -167,18 +167,18 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		Character  func(childComplexity int, id *int) int
+		Character  func(childComplexity int, id int) int
 		Characters func(childComplexity int, first *int, after *int) int
-		Comic      func(childComplexity int, id *int) int
+		Comic      func(childComplexity int, id int) int
 		Comics     func(childComplexity int, first *int, after *int) int
-		Creator    func(childComplexity int, id *int) int
+		Creator    func(childComplexity int, id int) int
 		Creators   func(childComplexity int, first *int, after *int) int
-		Event      func(childComplexity int, id *int) int
+		Event      func(childComplexity int, id int) int
 		Events     func(childComplexity int, first *int, after *int) int
-		Serie      func(childComplexity int, id *int) int
+		Serie      func(childComplexity int, id int) int
 		Series     func(childComplexity int, first *int, after *int) int
 		Stories    func(childComplexity int, first *int, after *int) int
-		Story      func(childComplexity int, id *int) int
+		Story      func(childComplexity int, id int) int
 	}
 
 	Series struct {
@@ -279,17 +279,17 @@ type EventResolver interface {
 	Stories(ctx context.Context, obj *maco.Event, first *int, after *int) (*StoriesResult, error)
 }
 type QueryResolver interface {
-	Character(ctx context.Context, id *int) (*maco.Character, error)
+	Character(ctx context.Context, id int) (*maco.Character, error)
 	Characters(ctx context.Context, first *int, after *int) (*CharactersResult, error)
-	Comic(ctx context.Context, id *int) (*maco.Comic, error)
+	Comic(ctx context.Context, id int) (*maco.Comic, error)
 	Comics(ctx context.Context, first *int, after *int) (*ComicsResult, error)
-	Creator(ctx context.Context, id *int) (*maco.Creator, error)
+	Creator(ctx context.Context, id int) (*maco.Creator, error)
 	Creators(ctx context.Context, first *int, after *int) (*CreatorsResult, error)
-	Event(ctx context.Context, id *int) (*maco.Event, error)
+	Event(ctx context.Context, id int) (*maco.Event, error)
 	Events(ctx context.Context, first *int, after *int) (*EventsResult, error)
-	Serie(ctx context.Context, id *int) (*maco.Series, error)
+	Serie(ctx context.Context, id int) (*maco.Series, error)
 	Series(ctx context.Context, first *int, after *int) (*SeriesResult, error)
-	Story(ctx context.Context, id *int) (*maco.Story, error)
+	Story(ctx context.Context, id int) (*maco.Story, error)
 	Stories(ctx context.Context, first *int, after *int) (*StoriesResult, error)
 }
 type SeriesResolver interface {
@@ -1025,7 +1025,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Character(childComplexity, args["id"].(*int)), true
+		return e.complexity.Query.Character(childComplexity, args["id"].(int)), true
 
 	case "Query.characters":
 		if e.complexity.Query.Characters == nil {
@@ -1049,7 +1049,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Comic(childComplexity, args["id"].(*int)), true
+		return e.complexity.Query.Comic(childComplexity, args["id"].(int)), true
 
 	case "Query.comics":
 		if e.complexity.Query.Comics == nil {
@@ -1073,7 +1073,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Creator(childComplexity, args["id"].(*int)), true
+		return e.complexity.Query.Creator(childComplexity, args["id"].(int)), true
 
 	case "Query.creators":
 		if e.complexity.Query.Creators == nil {
@@ -1097,7 +1097,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Event(childComplexity, args["id"].(*int)), true
+		return e.complexity.Query.Event(childComplexity, args["id"].(int)), true
 
 	case "Query.events":
 		if e.complexity.Query.Events == nil {
@@ -1121,7 +1121,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Serie(childComplexity, args["id"].(*int)), true
+		return e.complexity.Query.Serie(childComplexity, args["id"].(int)), true
 
 	case "Query.series":
 		if e.complexity.Query.Series == nil {
@@ -1157,7 +1157,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Story(childComplexity, args["id"].(*int)), true
+		return e.complexity.Query.Story(childComplexity, args["id"].(int)), true
 
 	case "Series.characters":
 		if e.complexity.Series.Characters == nil {
@@ -1721,17 +1721,17 @@ type PageInfo {
 }
 
 type Query {
-    character(id: Int): Character
+    character(id: Int!): Character
     characters(first: Int = 100, after: Int = 0): CharactersResult!
-    comic(id: Int): Comic
+    comic(id: Int!): Comic
     comics(first: Int = 100, after: Int = 0): ComicsResult!
-    creator(id: Int): Creator
+    creator(id: Int!): Creator
     creators(first: Int = 100, after: Int = 0): CreatorsResult!
-    event(id: Int): Event
+    event(id: Int!): Event
     events(first: Int = 100, after: Int = 0): EventsResult!
-    serie(id: Int): Series
+    serie(id: Int!): Series
     series(first: Int = 100, after: Int = 0): SeriesResult!
-    story(id: Int): Story
+    story(id: Int!): Story
     stories(first: Int = 100, after: Int = 0): StoriesResult!
 }
 `},
@@ -2198,9 +2198,9 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 func (ec *executionContext) field_Query_character_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 int
 	if tmp, ok := rawArgs["id"]; ok {
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2234,9 +2234,9 @@ func (ec *executionContext) field_Query_characters_args(ctx context.Context, raw
 func (ec *executionContext) field_Query_comic_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 int
 	if tmp, ok := rawArgs["id"]; ok {
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2270,9 +2270,9 @@ func (ec *executionContext) field_Query_comics_args(ctx context.Context, rawArgs
 func (ec *executionContext) field_Query_creator_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 int
 	if tmp, ok := rawArgs["id"]; ok {
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2306,9 +2306,9 @@ func (ec *executionContext) field_Query_creators_args(ctx context.Context, rawAr
 func (ec *executionContext) field_Query_event_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 int
 	if tmp, ok := rawArgs["id"]; ok {
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2342,9 +2342,9 @@ func (ec *executionContext) field_Query_events_args(ctx context.Context, rawArgs
 func (ec *executionContext) field_Query_serie_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 int
 	if tmp, ok := rawArgs["id"]; ok {
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2400,9 +2400,9 @@ func (ec *executionContext) field_Query_stories_args(ctx context.Context, rawArg
 func (ec *executionContext) field_Query_story_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 int
 	if tmp, ok := rawArgs["id"]; ok {
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -4902,7 +4902,7 @@ func (ec *executionContext) _Query_character(ctx context.Context, field graphql.
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Character(rctx, args["id"].(*int))
+		return ec.resolvers.Query().Character(rctx, args["id"].(int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -4967,7 +4967,7 @@ func (ec *executionContext) _Query_comic(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Comic(rctx, args["id"].(*int))
+		return ec.resolvers.Query().Comic(rctx, args["id"].(int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -5032,7 +5032,7 @@ func (ec *executionContext) _Query_creator(ctx context.Context, field graphql.Co
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Creator(rctx, args["id"].(*int))
+		return ec.resolvers.Query().Creator(rctx, args["id"].(int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -5097,7 +5097,7 @@ func (ec *executionContext) _Query_event(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Event(rctx, args["id"].(*int))
+		return ec.resolvers.Query().Event(rctx, args["id"].(int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -5162,7 +5162,7 @@ func (ec *executionContext) _Query_serie(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Serie(rctx, args["id"].(*int))
+		return ec.resolvers.Query().Serie(rctx, args["id"].(int))
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -5227,7 +5227,7 @@ func (ec *executionContext) _Query_story(ctx context.Context, field graphql.Coll
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, nil, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Story(rctx, args["id"].(*int))
+		return ec.resolvers.Query().Story(rctx, args["id"].(int))
 	})
 	if resTmp == nil {
 		return graphql.Null
