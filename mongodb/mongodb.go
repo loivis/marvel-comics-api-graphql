@@ -30,7 +30,8 @@ func New(uri string, database string) (*MongoDB, error) {
 		SetRetryWrites(true).
 		SetWriteConcern(
 			writeconcern.New(writeconcern.WMajority()),
-		)
+		).
+		SetMaxPoolSize(77)
 	client, err := mongo.Connect(ctx, opts.ApplyURI(uri))
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to mongodb: %v", err)
