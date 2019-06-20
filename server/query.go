@@ -24,7 +24,7 @@ func (r *queryResolver) Characters(ctx context.Context, first *int, after *int) 
 		return nil, nil
 	}
 
-	from, to := fromTo(*after, *after+*first, length)
+	from, to := fromTo(*after, *first, length)
 
 	return &macogql.CharactersResult{
 		Items: res[from:to],
