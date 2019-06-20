@@ -1,188 +1,188 @@
 type Character {
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    description: String
-    events(first: Int = 20, after: Int = 0): EventsResult
-    id: ID!
-    modified: String
-    name: String
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    thumbnail: String
-    urls: [URL!]
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  description: String
+  events(first: Int = 20, after: Int = 0): EventsResult
+  id: ID!
+  modified: String
+  name: String
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  thumbnail: String
+  urls: [URL!]
 }
 
 type Comic {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    collectedIssues(first: Int = 20, after: Int = 0): ComicsResult
-    collections(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    dates: [ComicDate!]
-    description: String
-    diamondCode: String
-    digitalID: Int
-    ean: String
-    events(first: Int = 20, after: Int = 0): EventsResult
-    format: String
-    id: ID!
-    images: [String!]
-    isbn: String
-    issn: String
-    issueNumber: Float
-    modified: String
-    pageCount: Int
-    prices:[ComicPrice!]
-    seriesID: Int
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    textObjects:[TextObject!]
-    thumbnail: String
-    title: String
-    upc: String
-    urls: [URL!]
-    variantDescription: String
-    variants(first: Int = 20, after: Int = 0): ComicsResult
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  collectedIssues(first: Int = 20, after: Int = 0): ComicsResult
+  collections(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  dates: [ComicDate!]
+  description: String
+  diamondCode: String
+  digitalID: Int
+  ean: String
+  events(first: Int = 20, after: Int = 0): EventsResult
+  format: String
+  id: ID!
+  images: [String!]
+  isbn: String
+  issn: String
+  issueNumber: Float
+  modified: String
+  pageCount: Int
+  prices: [ComicPrice!]
+  seriesID: Int
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  textObjects: [TextObject!]
+  thumbnail: String
+  title: String
+  upc: String
+  urls: [URL!]
+  variantDescription: String
+  variants(first: Int = 20, after: Int = 0): ComicsResult
 }
 
 type Creator {
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    events(first: Int = 20, after: Int = 0): EventsResult
-    firstName: String
-    fullName: String!
-    id: ID!
-    lastName: String
-    middleName: String
-    modified: String
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    suffix: String
-    thumbnail: String
-    urls: [URL!]
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  events(first: Int = 20, after: Int = 0): EventsResult
+  firstName: String
+  fullName: String!
+  id: ID!
+  lastName: String
+  middleName: String
+  modified: String
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  suffix: String
+  thumbnail: String
+  urls: [URL!]
 }
 
 type Event {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    description: String
-    end: String
-    id: ID!
-    modified: String
-    next: Int
-    previous: Int
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    start: String
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    thumbnail: String!
-    title: String!
-    urls: [URL!]
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  description: String
+  end: String
+  id: ID!
+  modified: String
+  next: Int
+  previous: Int
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  start: String
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  thumbnail: String!
+  title: String!
+  urls: [URL!]
 }
 
 type Series {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    description: String
-    endYear: Int
-    events(first: Int = 20, after: Int = 0): EventsResult
-    id: ID!
-    modified: String
-    next: Int
-    previous: Int
-    rating: String
-    startYear: Int
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    thumbnail: String!
-    title: String!
-    urls: [URL!]
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  description: String
+  endYear: Int
+  events(first: Int = 20, after: Int = 0): EventsResult
+  id: ID!
+  modified: String
+  next: Int
+  previous: Int
+  rating: String
+  startYear: Int
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  thumbnail: String!
+  title: String!
+  urls: [URL!]
 }
 
 type Story {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    description: String
-    events(first: Int = 20, after: Int = 0): EventsResult
-    id: ID!
-    modified: String
-    originalIssue: Comic
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    thumbnail: String!
-    title: String!
-    type: String!
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  description: String
+  events(first: Int = 20, after: Int = 0): EventsResult
+  id: ID!
+  modified: String
+  originalIssue: Comic
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  thumbnail: String!
+  title: String!
+  type: String!
 }
 
 type ComicDate {
-	date: String!
-	type: String!
+  date: String!
+  type: String!
 }
 
 type ComicPrice {
-	price: Float!
-	type: String!
+  price: Float!
+  type: String!
 }
 
-type TextObject  {
-	language: String!
-	text:     String!
-	type:     String!
+type TextObject {
+  language: String!
+  text: String!
+  type: String!
 }
 
 type URL {
-    type: String!
-    url: String!
+  type: String!
+  url: String!
 }
 
 type CharactersResult {
-    characters: [Character!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Character!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type ComicsResult {
-    comics: [Comic!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Comic!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type CreatorsResult {
-    creators: [Creator!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Creator!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type EventsResult {
-    events: [Event!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Event!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SeriesResult {
-    series: [Series!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Series!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type StoriesResult {
-    stories: [Story!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Story!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type PageInfo {
-    end: Int!
-    hasNext: Boolean!
+  end: Int!
+  hasNext: Boolean!
 }
 
 type Query {
-    character(id: Int!): Character
-    characters(first: Int = 100, after: Int = 0): CharactersResult!
-    comic(id: Int!): Comic
-    comics(first: Int = 100, after: Int = 0): ComicsResult!
-    creator(id: Int!): Creator
-    creators(first: Int = 100, after: Int = 0): CreatorsResult!
-    event(id: Int!): Event
-    events(first: Int = 100, after: Int = 0): EventsResult!
-    serie(id: Int!): Series
-    series(first: Int = 100, after: Int = 0): SeriesResult!
-    story(id: Int!): Story
-    stories(first: Int = 100, after: Int = 0): StoriesResult!
+  character(id: Int!): Character
+  characters(first: Int = 100, after: Int = 0): CharactersResult!
+  comic(id: Int!): Comic
+  comics(first: Int = 100, after: Int = 0): ComicsResult!
+  creator(id: Int!): Creator
+  creators(first: Int = 100, after: Int = 0): CreatorsResult!
+  event(id: Int!): Event
+  events(first: Int = 100, after: Int = 0): EventsResult!
+  serie(id: Int!): Series
+  series(first: Int = 100, after: Int = 0): SeriesResult!
+  story(id: Int!): Story
+  stories(first: Int = 100, after: Int = 0): StoriesResult!
 }

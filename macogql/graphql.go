@@ -63,7 +63,7 @@ type ComplexityRoot struct {
 	}
 
 	CharactersResult struct {
-		Characters func(childComplexity int) int
+		Items      func(childComplexity int) int
 		PageInfo   func(childComplexity int) int
 		TotalCount func(childComplexity int) int
 	}
@@ -110,7 +110,7 @@ type ComplexityRoot struct {
 	}
 
 	ComicsResult struct {
-		Comics     func(childComplexity int) int
+		Items      func(childComplexity int) int
 		PageInfo   func(childComplexity int) int
 		TotalCount func(childComplexity int) int
 	}
@@ -132,7 +132,7 @@ type ComplexityRoot struct {
 	}
 
 	CreatorsResult struct {
-		Creators   func(childComplexity int) int
+		Items      func(childComplexity int) int
 		PageInfo   func(childComplexity int) int
 		TotalCount func(childComplexity int) int
 	}
@@ -156,7 +156,7 @@ type ComplexityRoot struct {
 	}
 
 	EventsResult struct {
-		Events     func(childComplexity int) int
+		Items      func(childComplexity int) int
 		PageInfo   func(childComplexity int) int
 		TotalCount func(childComplexity int) int
 	}
@@ -201,14 +201,14 @@ type ComplexityRoot struct {
 	}
 
 	SeriesResult struct {
+		Items      func(childComplexity int) int
 		PageInfo   func(childComplexity int) int
-		Series     func(childComplexity int) int
 		TotalCount func(childComplexity int) int
 	}
 
 	StoriesResult struct {
+		Items      func(childComplexity int) int
 		PageInfo   func(childComplexity int) int
-		Stories    func(childComplexity int) int
 		TotalCount func(childComplexity int) int
 	}
 
@@ -417,12 +417,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Character.URLs(childComplexity), true
 
-	case "CharactersResult.characters":
-		if e.complexity.CharactersResult.Characters == nil {
+	case "CharactersResult.items":
+		if e.complexity.CharactersResult.Items == nil {
 			break
 		}
 
-		return e.complexity.CharactersResult.Characters(childComplexity), true
+		return e.complexity.CharactersResult.Items(childComplexity), true
 
 	case "CharactersResult.pageInfo":
 		if e.complexity.CharactersResult.PageInfo == nil {
@@ -697,12 +697,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.ComicPrice.Type(childComplexity), true
 
-	case "ComicsResult.comics":
-		if e.complexity.ComicsResult.Comics == nil {
+	case "ComicsResult.items":
+		if e.complexity.ComicsResult.Items == nil {
 			break
 		}
 
-		return e.complexity.ComicsResult.Comics(childComplexity), true
+		return e.complexity.ComicsResult.Items(childComplexity), true
 
 	case "ComicsResult.pageInfo":
 		if e.complexity.ComicsResult.PageInfo == nil {
@@ -829,12 +829,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Creator.URLs(childComplexity), true
 
-	case "CreatorsResult.creators":
-		if e.complexity.CreatorsResult.Creators == nil {
+	case "CreatorsResult.items":
+		if e.complexity.CreatorsResult.Items == nil {
 			break
 		}
 
-		return e.complexity.CreatorsResult.Creators(childComplexity), true
+		return e.complexity.CreatorsResult.Items(childComplexity), true
 
 	case "CreatorsResult.pageInfo":
 		if e.complexity.CreatorsResult.PageInfo == nil {
@@ -980,12 +980,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Event.URLs(childComplexity), true
 
-	case "EventsResult.events":
-		if e.complexity.EventsResult.Events == nil {
+	case "EventsResult.items":
+		if e.complexity.EventsResult.Items == nil {
 			break
 		}
 
-		return e.complexity.EventsResult.Events(childComplexity), true
+		return e.complexity.EventsResult.Items(childComplexity), true
 
 	case "EventsResult.pageInfo":
 		if e.complexity.EventsResult.PageInfo == nil {
@@ -1296,19 +1296,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Series.URLs(childComplexity), true
 
+	case "SeriesResult.items":
+		if e.complexity.SeriesResult.Items == nil {
+			break
+		}
+
+		return e.complexity.SeriesResult.Items(childComplexity), true
+
 	case "SeriesResult.pageInfo":
 		if e.complexity.SeriesResult.PageInfo == nil {
 			break
 		}
 
 		return e.complexity.SeriesResult.PageInfo(childComplexity), true
-
-	case "SeriesResult.series":
-		if e.complexity.SeriesResult.Series == nil {
-			break
-		}
-
-		return e.complexity.SeriesResult.Series(childComplexity), true
 
 	case "SeriesResult.totalCount":
 		if e.complexity.SeriesResult.TotalCount == nil {
@@ -1317,19 +1317,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.SeriesResult.TotalCount(childComplexity), true
 
+	case "StoriesResult.items":
+		if e.complexity.StoriesResult.Items == nil {
+			break
+		}
+
+		return e.complexity.StoriesResult.Items(childComplexity), true
+
 	case "StoriesResult.pageInfo":
 		if e.complexity.StoriesResult.PageInfo == nil {
 			break
 		}
 
 		return e.complexity.StoriesResult.PageInfo(childComplexity), true
-
-	case "StoriesResult.stories":
-		if e.complexity.StoriesResult.Stories == nil {
-			break
-		}
-
-		return e.complexity.StoriesResult.Stories(childComplexity), true
 
 	case "StoriesResult.totalCount":
 		if e.complexity.StoriesResult.TotalCount == nil {
@@ -1547,192 +1547,192 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 
 var parsedSchema = gqlparser.MustLoadSchema(
 	&ast.Source{Name: "schema.graphql", Input: `type Character {
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    description: String
-    events(first: Int = 20, after: Int = 0): EventsResult
-    id: ID!
-    modified: String
-    name: String
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    thumbnail: String
-    urls: [URL!]
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  description: String
+  events(first: Int = 20, after: Int = 0): EventsResult
+  id: ID!
+  modified: String
+  name: String
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  thumbnail: String
+  urls: [URL!]
 }
 
 type Comic {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    collectedIssues(first: Int = 20, after: Int = 0): ComicsResult
-    collections(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    dates: [ComicDate!]
-    description: String
-    diamondCode: String
-    digitalID: Int
-    ean: String
-    events(first: Int = 20, after: Int = 0): EventsResult
-    format: String
-    id: ID!
-    images: [String!]
-    isbn: String
-    issn: String
-    issueNumber: Float
-    modified: String
-    pageCount: Int
-    prices:[ComicPrice!]
-    seriesID: Int
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    textObjects:[TextObject!]
-    thumbnail: String
-    title: String
-    upc: String
-    urls: [URL!]
-    variantDescription: String
-    variants(first: Int = 20, after: Int = 0): ComicsResult
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  collectedIssues(first: Int = 20, after: Int = 0): ComicsResult
+  collections(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  dates: [ComicDate!]
+  description: String
+  diamondCode: String
+  digitalID: Int
+  ean: String
+  events(first: Int = 20, after: Int = 0): EventsResult
+  format: String
+  id: ID!
+  images: [String!]
+  isbn: String
+  issn: String
+  issueNumber: Float
+  modified: String
+  pageCount: Int
+  prices: [ComicPrice!]
+  seriesID: Int
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  textObjects: [TextObject!]
+  thumbnail: String
+  title: String
+  upc: String
+  urls: [URL!]
+  variantDescription: String
+  variants(first: Int = 20, after: Int = 0): ComicsResult
 }
 
 type Creator {
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    events(first: Int = 20, after: Int = 0): EventsResult
-    firstName: String
-    fullName: String!
-    id: ID!
-    lastName: String
-    middleName: String
-    modified: String
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    suffix: String
-    thumbnail: String
-    urls: [URL!]
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  events(first: Int = 20, after: Int = 0): EventsResult
+  firstName: String
+  fullName: String!
+  id: ID!
+  lastName: String
+  middleName: String
+  modified: String
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  suffix: String
+  thumbnail: String
+  urls: [URL!]
 }
 
 type Event {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    description: String
-    end: String
-    id: ID!
-    modified: String
-    next: Int
-    previous: Int
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    start: String
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    thumbnail: String!
-    title: String!
-    urls: [URL!]
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  description: String
+  end: String
+  id: ID!
+  modified: String
+  next: Int
+  previous: Int
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  start: String
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  thumbnail: String!
+  title: String!
+  urls: [URL!]
 }
 
 type Series {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    description: String
-    endYear: Int
-    events(first: Int = 20, after: Int = 0): EventsResult
-    id: ID!
-    modified: String
-    next: Int
-    previous: Int
-    rating: String
-    startYear: Int
-    stories(first: Int = 20, after: Int = 0): StoriesResult
-    thumbnail: String!
-    title: String!
-    urls: [URL!]
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  description: String
+  endYear: Int
+  events(first: Int = 20, after: Int = 0): EventsResult
+  id: ID!
+  modified: String
+  next: Int
+  previous: Int
+  rating: String
+  startYear: Int
+  stories(first: Int = 20, after: Int = 0): StoriesResult
+  thumbnail: String!
+  title: String!
+  urls: [URL!]
 }
 
 type Story {
-    characters(first: Int = 20, after: Int = 0): CharactersResult
-    comics(first: Int = 20, after: Int = 0): ComicsResult
-    creators(first: Int = 20, after: Int = 0): CreatorsResult
-    description: String
-    events(first: Int = 20, after: Int = 0): EventsResult
-    id: ID!
-    modified: String
-    originalIssue: Comic
-    series(first: Int = 20, after: Int = 0): SeriesResult
-    thumbnail: String!
-    title: String!
-    type: String!
+  characters(first: Int = 20, after: Int = 0): CharactersResult
+  comics(first: Int = 20, after: Int = 0): ComicsResult
+  creators(first: Int = 20, after: Int = 0): CreatorsResult
+  description: String
+  events(first: Int = 20, after: Int = 0): EventsResult
+  id: ID!
+  modified: String
+  originalIssue: Comic
+  series(first: Int = 20, after: Int = 0): SeriesResult
+  thumbnail: String!
+  title: String!
+  type: String!
 }
 
 type ComicDate {
-	date: String!
-	type: String!
+  date: String!
+  type: String!
 }
 
 type ComicPrice {
-	price: Float!
-	type: String!
+  price: Float!
+  type: String!
 }
 
-type TextObject  {
-	language: String!
-	text:     String!
-	type:     String!
+type TextObject {
+  language: String!
+  text: String!
+  type: String!
 }
 
 type URL {
-    type: String!
-    url: String!
+  type: String!
+  url: String!
 }
 
 type CharactersResult {
-    characters: [Character!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Character!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type ComicsResult {
-    comics: [Comic!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Comic!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type CreatorsResult {
-    creators: [Creator!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Creator!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type EventsResult {
-    events: [Event!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Event!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type SeriesResult {
-    series: [Series!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Series!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type StoriesResult {
-    stories: [Story!]
-    pageInfo: PageInfo!
-    totalCount: Int!
+  items: [Story!]
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type PageInfo {
-    end: Int!
-    hasNext: Boolean!
+  end: Int!
+  hasNext: Boolean!
 }
 
 type Query {
-    character(id: Int!): Character
-    characters(first: Int = 100, after: Int = 0): CharactersResult!
-    comic(id: Int!): Comic
-    comics(first: Int = 100, after: Int = 0): ComicsResult!
-    creator(id: Int!): Creator
-    creators(first: Int = 100, after: Int = 0): CreatorsResult!
-    event(id: Int!): Event
-    events(first: Int = 100, after: Int = 0): EventsResult!
-    serie(id: Int!): Series
-    series(first: Int = 100, after: Int = 0): SeriesResult!
-    story(id: Int!): Story
-    stories(first: Int = 100, after: Int = 0): StoriesResult!
+  character(id: Int!): Character
+  characters(first: Int = 100, after: Int = 0): CharactersResult!
+  comic(id: Int!): Comic
+  comics(first: Int = 100, after: Int = 0): ComicsResult!
+  creator(id: Int!): Creator
+  creators(first: Int = 100, after: Int = 0): CreatorsResult!
+  event(id: Int!): Event
+  events(first: Int = 100, after: Int = 0): EventsResult!
+  serie(id: Int!): Series
+  series(first: Int = 100, after: Int = 0): SeriesResult!
+  story(id: Int!): Story
+  stories(first: Int = 100, after: Int = 0): StoriesResult!
 }
 `},
 )
@@ -2934,7 +2934,7 @@ func (ec *executionContext) _Character_urls(ctx context.Context, field graphql.C
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _CharactersResult_characters(ctx context.Context, field graphql.CollectedField, obj *CharactersResult) graphql.Marshaler {
+func (ec *executionContext) _CharactersResult_items(ctx context.Context, field graphql.CollectedField, obj *CharactersResult) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -2947,7 +2947,7 @@ func (ec *executionContext) _CharactersResult_characters(ctx context.Context, fi
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Characters, nil
+		return obj.Items, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -3844,7 +3844,7 @@ func (ec *executionContext) _ComicPrice_type(ctx context.Context, field graphql.
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ComicsResult_comics(ctx context.Context, field graphql.CollectedField, obj *ComicsResult) graphql.Marshaler {
+func (ec *executionContext) _ComicsResult_items(ctx context.Context, field graphql.CollectedField, obj *ComicsResult) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -3857,7 +3857,7 @@ func (ec *executionContext) _ComicsResult_comics(ctx context.Context, field grap
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Comics, nil
+		return obj.Items, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -4268,7 +4268,7 @@ func (ec *executionContext) _Creator_urls(ctx context.Context, field graphql.Col
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _CreatorsResult_creators(ctx context.Context, field graphql.CollectedField, obj *CreatorsResult) graphql.Marshaler {
+func (ec *executionContext) _CreatorsResult_items(ctx context.Context, field graphql.CollectedField, obj *CreatorsResult) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -4281,7 +4281,7 @@ func (ec *executionContext) _CreatorsResult_creators(ctx context.Context, field 
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Creators, nil
+		return obj.Items, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -4750,7 +4750,7 @@ func (ec *executionContext) _Event_urls(ctx context.Context, field graphql.Colle
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _EventsResult_events(ctx context.Context, field graphql.CollectedField, obj *EventsResult) graphql.Marshaler {
+func (ec *executionContext) _EventsResult_items(ctx context.Context, field graphql.CollectedField, obj *EventsResult) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -4763,7 +4763,7 @@ func (ec *executionContext) _EventsResult_events(ctx context.Context, field grap
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Events, nil
+		return obj.Items, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -5755,7 +5755,7 @@ func (ec *executionContext) _Series_urls(ctx context.Context, field graphql.Coll
 	return ec.marshalOURL2ᚕᚖgithubᚗcomᚋloivisᚋmarvelᚑcomicsᚑapiᚑdataᚑloaderᚋmacoᚐURL(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _SeriesResult_series(ctx context.Context, field graphql.CollectedField, obj *SeriesResult) graphql.Marshaler {
+func (ec *executionContext) _SeriesResult_items(ctx context.Context, field graphql.CollectedField, obj *SeriesResult) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -5768,7 +5768,7 @@ func (ec *executionContext) _SeriesResult_series(ctx context.Context, field grap
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Series, nil
+		return obj.Items, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -5833,7 +5833,7 @@ func (ec *executionContext) _SeriesResult_totalCount(ctx context.Context, field 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _StoriesResult_stories(ctx context.Context, field graphql.CollectedField, obj *StoriesResult) graphql.Marshaler {
+func (ec *executionContext) _StoriesResult_items(ctx context.Context, field graphql.CollectedField, obj *StoriesResult) graphql.Marshaler {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() { ec.Tracer.EndFieldExecution(ctx) }()
 	rctx := &graphql.ResolverContext{
@@ -5846,7 +5846,7 @@ func (ec *executionContext) _StoriesResult_stories(ctx context.Context, field gr
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp := ec.FieldMiddleware(ctx, obj, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Stories, nil
+		return obj.Items, nil
 	})
 	if resTmp == nil {
 		return graphql.Null
@@ -7312,8 +7312,8 @@ func (ec *executionContext) _CharactersResult(ctx context.Context, sel ast.Selec
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("CharactersResult")
-		case "characters":
-			out.Values[i] = ec._CharactersResult_characters(ctx, field, obj)
+		case "items":
+			out.Values[i] = ec._CharactersResult_items(ctx, field, obj)
 		case "pageInfo":
 			out.Values[i] = ec._CharactersResult_pageInfo(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -7563,8 +7563,8 @@ func (ec *executionContext) _ComicsResult(ctx context.Context, sel ast.Selection
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("ComicsResult")
-		case "comics":
-			out.Values[i] = ec._ComicsResult_comics(ctx, field, obj)
+		case "items":
+			out.Values[i] = ec._ComicsResult_items(ctx, field, obj)
 		case "pageInfo":
 			out.Values[i] = ec._ComicsResult_pageInfo(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -7687,8 +7687,8 @@ func (ec *executionContext) _CreatorsResult(ctx context.Context, sel ast.Selecti
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("CreatorsResult")
-		case "creators":
-			out.Values[i] = ec._CreatorsResult_creators(ctx, field, obj)
+		case "items":
+			out.Values[i] = ec._CreatorsResult_items(ctx, field, obj)
 		case "pageInfo":
 			out.Values[i] = ec._CreatorsResult_pageInfo(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -7827,8 +7827,8 @@ func (ec *executionContext) _EventsResult(ctx context.Context, sel ast.Selection
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("EventsResult")
-		case "events":
-			out.Values[i] = ec._EventsResult_events(ctx, field, obj)
+		case "items":
+			out.Values[i] = ec._EventsResult_items(ctx, field, obj)
 		case "pageInfo":
 			out.Values[i] = ec._EventsResult_pageInfo(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -8181,8 +8181,8 @@ func (ec *executionContext) _SeriesResult(ctx context.Context, sel ast.Selection
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("SeriesResult")
-		case "series":
-			out.Values[i] = ec._SeriesResult_series(ctx, field, obj)
+		case "items":
+			out.Values[i] = ec._SeriesResult_items(ctx, field, obj)
 		case "pageInfo":
 			out.Values[i] = ec._SeriesResult_pageInfo(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -8215,8 +8215,8 @@ func (ec *executionContext) _StoriesResult(ctx context.Context, sel ast.Selectio
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("StoriesResult")
-		case "stories":
-			out.Values[i] = ec._StoriesResult_stories(ctx, field, obj)
+		case "items":
+			out.Values[i] = ec._StoriesResult_items(ctx, field, obj)
 		case "pageInfo":
 			out.Values[i] = ec._StoriesResult_pageInfo(ctx, field, obj)
 			if out.Values[i] == graphql.Null {

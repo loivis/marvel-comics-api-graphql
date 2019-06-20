@@ -27,7 +27,7 @@ func (r *comicResolver) Characters(ctx context.Context, obj *maco.Comic, first *
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.CharactersResult{
-		Characters: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -54,7 +54,7 @@ func (r *comicResolver) CollectedIssues(ctx context.Context, obj *maco.Comic, fi
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.ComicsResult{
-		Comics: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -81,7 +81,7 @@ func (r *comicResolver) Collections(ctx context.Context, obj *maco.Comic, first 
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.ComicsResult{
-		Comics: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -108,7 +108,7 @@ func (r *comicResolver) Creators(ctx context.Context, obj *maco.Comic, first *in
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.CreatorsResult{
-		Creators: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -135,7 +135,7 @@ func (r *comicResolver) Events(ctx context.Context, obj *maco.Comic, first *int,
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.EventsResult{
-		Events: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -162,7 +162,7 @@ func (r *comicResolver) Stories(ctx context.Context, obj *maco.Comic, first *int
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.StoriesResult{
-		Stories: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -185,7 +185,7 @@ func (r *comicResolver) Variants(ctx context.Context, obj *maco.Comic, first *in
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.ComicsResult{
-		Comics: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,

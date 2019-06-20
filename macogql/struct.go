@@ -7,25 +7,25 @@ import (
 )
 
 type CharactersResult struct {
-	Characters []*maco.Character `json:"characters"`
+	Items      []*maco.Character `json:"items"`
 	PageInfo   *PageInfo         `json:"pageInfo"`
 	TotalCount int               `json:"totalCount"`
 }
 
 type ComicsResult struct {
-	Comics     []*maco.Comic `json:"comics"`
+	Items      []*maco.Comic `json:"items"`
 	PageInfo   *PageInfo     `json:"pageInfo"`
 	TotalCount int           `json:"totalCount"`
 }
 
 type CreatorsResult struct {
-	Creators   []*maco.Creator `json:"creators"`
+	Items      []*maco.Creator `json:"items"`
 	PageInfo   *PageInfo       `json:"pageInfo"`
 	TotalCount int             `json:"totalCount"`
 }
 
 type EventsResult struct {
-	Events     []*maco.Event `json:"events"`
+	Items      []*maco.Event `json:"items"`
 	PageInfo   *PageInfo     `json:"pageInfo"`
 	TotalCount int           `json:"totalCount"`
 }
@@ -36,13 +36,13 @@ type PageInfo struct {
 }
 
 type SeriesResult struct {
-	Series     []*maco.Series `json:"series"`
+	Items      []*maco.Series `json:"items"`
 	PageInfo   *PageInfo      `json:"pageInfo"`
 	TotalCount int            `json:"totalCount"`
 }
 
 type StoriesResult struct {
-	Stories    []*maco.Story `json:"stories"`
+	Items      []*maco.Story `json:"items"`
 	PageInfo   *PageInfo     `json:"pageInfo"`
 	TotalCount int           `json:"totalCount"`
 }

@@ -27,7 +27,7 @@ func (r *queryResolver) Characters(ctx context.Context, first *int, after *int) 
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.CharactersResult{
-		Characters: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -54,7 +54,7 @@ func (r *queryResolver) Comics(ctx context.Context, first *int, after *int) (*ma
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.ComicsResult{
-		Comics: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -81,7 +81,7 @@ func (r *queryResolver) Creators(ctx context.Context, first *int, after *int) (*
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.CreatorsResult{
-		Creators: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -108,7 +108,7 @@ func (r *queryResolver) Events(ctx context.Context, first *int, after *int) (*ma
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.EventsResult{
-		Events: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -135,7 +135,7 @@ func (r *queryResolver) Series(ctx context.Context, first *int, after *int) (*ma
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.SeriesResult{
-		Series: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
@@ -162,7 +162,7 @@ func (r *queryResolver) Stories(ctx context.Context, first *int, after *int) (*m
 	from, to := fromTo(*after, *after+*first, length)
 
 	return &macogql.StoriesResult{
-		Stories: res[from:to],
+		Items: res[from:to],
 		PageInfo: &macogql.PageInfo{
 			End:     to,
 			HasNext: to < length,
