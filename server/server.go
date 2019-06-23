@@ -51,8 +51,8 @@ func (s *Server) Story() macogql.StoryResolver {
 }
 
 func (s *Server) Register(mux *http.ServeMux) {
-	mux.Handle("/", handler.Playground("GraphQL playground", "/query"))
-	mux.Handle("/query", handler.GraphQL(macogql.NewExecutableSchema(macogql.Config{Resolvers: s})))
+	mux.Handle("/", cors(handler.Playground("GraphQL playground", "/query")))
+	mux.Handle("/query", cors(handler.GraphQL(macogql.NewExecutableSchema(macogql.Config{Resolvers: s}))))
 }
 
 func fromTo(offset, length, max int) (int, int) {
